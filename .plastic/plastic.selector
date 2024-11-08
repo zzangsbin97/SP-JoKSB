@@ -1,0 +1,4 @@
+repository "SP_JoKSB_1@tnqlsk9519@cloud"
+  path "/"
+    br "/main"
+    co "/main"
