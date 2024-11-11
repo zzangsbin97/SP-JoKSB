@@ -81,12 +81,12 @@ namespace ClearSky
             }
 
             // 수직 이동 (위: W, 아래: S)
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
                 moveVelocity += Vector3.up;
                 anim.SetBool("isRun", true);
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
                 moveVelocity += Vector3.down;
                 anim.SetBool("isRun", true);
