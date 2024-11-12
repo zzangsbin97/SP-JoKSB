@@ -23,7 +23,12 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.35f, moveDirection, 1.5f, LayerMask.GetMask("Teammate"));
     if (hit.collider != null) {
             Debug.Log("Raycast has hit the object " + hit.collider.gameObject);
-        }
+
+
+            // 여기에 대화 창 뜨게 하기
+
+			hit.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 레이어 객체 사라지게 하기
+		}
     }
 
     // Update is called once per frame
