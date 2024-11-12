@@ -199,6 +199,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2053518115102101880, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1512151064}
+    - targetCorrespondingSourceObject: {fileID: 2053518115102101880, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1512151065}
   m_SourcePrefab: {fileID: 100100000, guid: 521aebf732701414da1c25c63cb8390b, type: 3}
 --- !u!1 &95012857
 GameObject:
@@ -1484,6 +1487,43 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1512151065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512151059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e277da3cbeb553942952a94dec07e34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interAction:
+    m_Name: Inter
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 07004b1a-e68a-40cd-b7eb-1f87f772f1e5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 62bb30b1-0cc1-4c46-9fa6-9eb83b673f51
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Inter
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 70813c7e-17ed-49c8-bc1e-c1c5f00a6d3b
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Inter
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &1525474419
 GameObject:
   m_ObjectHideFlags: 0
