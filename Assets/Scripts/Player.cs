@@ -12,32 +12,64 @@ public class Player : MonoBehaviour
     public double deffensePercent;
 
     public InputAction interAction;
-    private Rigidbody2D rigidbody2d;
-    Vector2 moveDirection = new Vector2(1, 0);
+    Rigidbody2D rigidbody2d;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+	// Vector2 rightDirection = new Vector2(1, 0);
+
+
+	// Start is called before the first frame update
+	void Start(){
+
         rigidbody2d = GetComponent<Rigidbody2D>();
         interAction.Enable();
         interAction.performed += FindTeammate;
     }
 
-    void FindTeammate(InputAction.CallbackContext context) {
-        RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.25f, moveDirection, 1.5f, LayerMask.GetMask("Teammate"));
-    if (hit.collider != null) {
-            Debug.Log("Raycast has hit the object " + hit.collider.gameObject);
+	// Update is called once per frame
+	void Update() {
+
+	}
+
+	void FindTeammate(InputAction.CallbackContext context) {
+		// RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.40f, moveDirection, 1.5f, LayerMask.GetMask("Teammate"));
+		RaycastHit2D hitR = Physics2D.Raycast(rigidbody2d.position, Vector2.right, 1.5f, LayerMask.GetMask("Teammate"));
+		RaycastHit2D hitL = Physics2D.Raycast(rigidbody2d.position, Vector2.left, 1.5f, LayerMask.GetMask("Teammate"));
+		RaycastHit2D hitU = Physics2D.Raycast(rigidbody2d.position, Vector2.up, 1.5f, LayerMask.GetMask("Teammate"));
+		RaycastHit2D hitD = Physics2D.Raycast(rigidbody2d.position, Vector2.down, 1.5f, LayerMask.GetMask("Teammate"));
 
 
-            // 여기에 대화 창 뜨게 하기
+		if (hitR.collider != null) {
+            Debug.Log("Raycast has hit the object " + hitR.collider.gameObject);
 
-			hit.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 레이어 객체 사라지게 하기
+
+			// 여기에 대화 창 뜨게 하기
+			hitR.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 레이어 객체 사라지게 하기
 		}
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		if (hitL.collider != null) {
+			Debug.Log("Raycast has hit the object " + hitL.collider.gameObject);
+
+
+			// 여기에 대화 창 뜨게 하기
+			hitL.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 레이어 객체 사라지게 하기
+		}
+
+		if (hitU.collider != null) {
+			Debug.Log("Raycast has hit the object " + hitU.collider.gameObject);
+
+
+			// 여기에 대화 창 뜨게 하기
+			hitU.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 레이어 객체 사라지게 하기
+		}
+
+		if (hitD.collider != null) {
+			Debug.Log("Raycast has hit the object " + hitD.collider.gameObject);
+
+
+			// 여기에 대화 창 뜨게 하기
+			hitD.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 레이어 객체 사라지게 하기
+		}
+	}
+
+    
 }
