@@ -7,6 +7,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public int playerHP; // 몇으로 할지
+    public int playerStandGauge; // 못정했삼
+    public double deffensePercent;
+
     public InputAction interAction;
     private Rigidbody2D rigidbody2d;
     Vector2 moveDirection = new Vector2(1, 0);
@@ -20,7 +24,7 @@ public class Player : MonoBehaviour
     }
 
     void FindTeammate(InputAction.CallbackContext context) {
-        RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.35f, moveDirection, 1.5f, LayerMask.GetMask("Teammate"));
+        RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.25f, moveDirection, 1.5f, LayerMask.GetMask("Teammate"));
     if (hit.collider != null) {
             Debug.Log("Raycast has hit the object " + hit.collider.gameObject);
 

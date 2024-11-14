@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 95012859}
   - component: {fileID: 95012858}
   - component: {fileID: 95012861}
+  - component: {fileID: 95012862}
   m_Layer: 3
   m_Name: "\uBE14\uB808\uC624"
   m_TagString: Untagged
@@ -257,7 +258,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.010441184, y: -0.01092124}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -268,7 +269,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.67, y: 3.39}
+  m_Size: {x: 3.0250118, y: 3.7176313}
   m_EdgeRadius: 0
 --- !u!212 &95012859
 SpriteRenderer:
@@ -364,6 +365,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &95012862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95012857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9fb1ddb7e99274995505354c969577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 0
+  standGauge: 0
+  teammateName: "\uBE14\uB808\uC624"
+  IsInMyTeam: 0
 --- !u!1001 &118257462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1530,6 +1547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e277da3cbeb553942952a94dec07e34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHP: 0
+  playerStandGauge: 0
   interAction:
     m_Name: Inter
     m_Type: 0
@@ -139786,6 +139805,51 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1934900774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1934900776}
+  - component: {fileID: 1934900775}
+  m_Layer: 0
+  m_Name: TeammateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1934900775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934900774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30576cab322eccf48bd8e9b45f23cff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teammates: []
+--- !u!4 &1934900776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934900774}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.793424, y: 11.549512, z: -0.042116515}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1944639482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139873,37 +139937,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2055102311959635375, guid: 99597c7b4aa47494fb2b6061505735da, type: 3}
   m_PrefabInstance: {fileID: 879588851}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2124930955
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2124930956}
-  m_Layer: 0
-  m_Name: OJH
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2124930956
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2124930955}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.520779, y: -5.3208947, z: -0.08065319}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -139914,6 +139947,6 @@ SceneRoots:
   - {fileID: 58457193}
   - {fileID: 761558716}
   - {fileID: 1682405349}
-  - {fileID: 2124930956}
   - {fileID: 95012860}
   - {fileID: 1903344380}
+  - {fileID: 1934900776}
