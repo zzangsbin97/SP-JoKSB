@@ -1,75 +1,45 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
-{
-    public int playerHP; // 몇으로 할지
-    public int playerStandGauge; // 못정했삼
-    public double deffensePercent;
+public class Player : MonoBehaviour {
+	public int playerHP;
+	public int playerStandGauge;
+	public double deffensePercent;
 
-    public InputAction interAction;
-    Rigidbody2D rigidbody2d;
+	public InputAction interAction;
+	Rigidbody2D rigidbody2d;
+	private TeammateManager teammateManager;
 
-	// Vector2 rightDirection = new Vector2(1, 0);
-
-
-	// Start is called before the first frame update
-	void Start(){
-
-        rigidbody2d = GetComponent<Rigidbody2D>();
-        interAction.Enable();
-        interAction.performed += FindTeammate;
-    }
-
-	// Update is called once per frame
-	void Update() {
-
+	void Start() {
+		rigidbody2d = GetComponent<Rigidbody2D>();
+		interAction.Enable();
+		interAction.performed += FindTeammate;
+		teammateManager = FindObjectOfType<TeammateManager>(); // TeammateManager 가져오기
 	}
 
 	void FindTeammate(InputAction.CallbackContext context) {
-		// RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.40f, moveDirection, 1.5f, LayerMask.GetMask("Teammate"));
-		RaycastHit2D hitR = Physics2D.Raycast(rigidbody2d.position, Vector2.right, 1.5f, LayerMask.GetMask("Teammate"));
-		RaycastHit2D hitL = Physics2D.Raycast(rigidbody2d.position, Vector2.left, 1.5f, LayerMask.GetMask("Teammate"));
-		RaycastHit2D hitU = Physics2D.Raycast(rigidbody2d.position, Vector2.up, 1.5f, LayerMask.GetMask("Teammate"));
-		RaycastHit2D hitD = Physics2D.Raycast(rigidbody2d.position, Vector2.down, 1.5f, LayerMask.GetMask("Teammate"));
+		// 네 방향으로 Raycast 수행
+		RaycastHit2D[] hits = {
+			Physics2D.Raycast(rigidbody2d.position, Vector2.right, 1.5f, LayerMask.GetMask("Teammate")),
+			Physics2D.Raycast(rigidbody2d.position, Vector2.left, 1.5f, LayerMask.GetMask("Teammate")),
+			Physics2D.Raycast(rigidbody2d.position, Vector2.up, 1.5f, LayerMask.GetMask("Teammate")),
+			Physics2D.Raycast(rigidbody2d.position, Vector2.down, 1.5f, LayerMask.GetMask("Teammate"))
+		};
 
-
-		if (hitR.collider != null) {
-            Debug.Log("Raycast has hit the object " + hitR.collider.gameObject);
-
-
-			// 여기에 대화 창 뜨게 하기
-			hitR.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 레이어 객체 사라지게 하기
-		}
-
-		if (hitL.collider != null) {
-			Debug.Log("Raycast has hit the object " + hitL.collider.gameObject);
-
-
-			// 여기에 대화 창 뜨게 하기
-			hitL.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 레이어 객체 사라지게 하기
-		}
-
-		if (hitU.collider != null) {
-			Debug.Log("Raycast has hit the object " + hitU.collider.gameObject);
-
-
-			// 여기에 대화 창 뜨게 하기
-			hitU.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 레이어 객체 사라지게 하기
-		}
-
-		if (hitD.collider != null) {
-			Debug.Log("Raycast has hit the object " + hitD.collider.gameObject);
-
-
-			// 여기에 대화 창 뜨게 하기
-			hitD.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 레이어 객체 사라지게 하기
+		foreach (var hit in hits) {
+			if (hit.collider != null) {
+				Teammate teammate = hit.collider.gameObject.GetComponent<Teammate>();
+				if (teammate != null && !teammate.IsInMyTeam) // Teammate인지 확인하고 팀에 추가되지 않은 경우
+				{
+					Debug.Log(teammate.teammateName + "을(를) 찾았습니다!");
+					teammate.IsInMyTeam = true; // 팀에 추가 표시
+					teammateManager.AddTeammate(teammate); // TeammateManager에 추가
+					hit.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 객체 비활성화
+				}
+			}
 		}
 	}
-
-    
 }

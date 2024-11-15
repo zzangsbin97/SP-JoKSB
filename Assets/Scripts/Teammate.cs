@@ -17,20 +17,20 @@ public class Teammate : MonoBehaviour
     public bool IsInMyTeam = false;
     private TeammateManager teammateManager;
 
-
+    /*
     void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("일단충돌함...");
         Player player = other.GetComponent<Player>();
 
         if (player != null) {
             Debug.Log(teammateName);
-            if (this.gameObject.activeSelf != false) {
+            (this.gameObject.activeSelf != false) {
                 IsInMyTeam = true;
                 teammateManager.AddTeammate(this);
-            }
+            } 
         }
-    }
-    
+    } */
+     
     // Start is called before the first frame update
     void Start()
     {
