@@ -7,6 +7,8 @@ public class TeammateManager : MonoBehaviour
 {
     public List<Teammate> teammates = new List<Teammate>();
 
+
+
     public void AddTeammate(Teammate teammate){
     if (!teammates.Contains(teammate))
         {
@@ -17,10 +19,13 @@ public class TeammateManager : MonoBehaviour
         }
     
     }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        DontDestroyOnLoad(gameObject);//
     }
 
     // Update is called once per frame
@@ -28,4 +33,6 @@ public class TeammateManager : MonoBehaviour
     {
         
     }
+
+
 }

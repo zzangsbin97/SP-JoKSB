@@ -17,8 +17,7 @@ public class Teammate : MonoBehaviour
     public bool IsInMyTeam = false;
     private TeammateManager teammateManager;
 
-    /*
-    void OnTriggerEnter2D(Collider2D other) {
+    /*void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("일단충돌함...");
         Player player = other.GetComponent<Player>();
 
@@ -29,7 +28,7 @@ public class Teammate : MonoBehaviour
                 teammateManager.AddTeammate(this);
             } 
         }
-    } */
+    }*/
      
     // Start is called before the first frame update
     void Start()
