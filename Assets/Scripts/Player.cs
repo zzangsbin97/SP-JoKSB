@@ -9,9 +9,10 @@ public class Player : MonoBehaviour {
 	public int playerStandGauge;
 	public double deffensePercent;
 
-	public InputAction interAction;
+	public InputAction interAction; // 상호작용키
 	Rigidbody2D rigidbody2d;
 	private TeammateManager teammateManager;
+	public TeammateDialogueManager teammateDialogueManager;
 
 	void Start() {
 		rigidbody2d = GetComponent<Rigidbody2D>();
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour {
 					Debug.Log(teammate.teammateName + "을(를) 찾았습니다!");
 					teammate.IsInMyTeam = true; // 팀에 추가 표시
 					teammateManager.AddTeammate(teammate); // TeammateManager에 추가
+					// teammateDialogueManager.Talk(hit.collider.gameObject);
 					hit.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 객체 비활성화
 				}
 			}
