@@ -38,6 +38,7 @@ public class BattleUI : MonoBehaviour
             return;
         }
 
+
         // 부모 객체 초기화 (이전 버튼 삭제)
         foreach (Transform child in buttonContainer)
         {
@@ -60,8 +61,12 @@ public class BattleUI : MonoBehaviour
 
         Debug.Log("배틀 동료 수: " + battleManager.battleTeammates.Count);
 
-        // 동료 정보에 따라 버튼 생성
-        foreach (Teammate teammate in battleManager.battleTeammates)
+		// 버튼 생성 여부 확인 플래그
+		bool buttonCreated = false;
+
+
+		// 동료 정보에 따라 버튼 생성
+		foreach (Teammate teammate in battleManager.battleTeammates)
         {
             Debug.Log("동료 버튼 생성 중: " + (teammate.teammateName ?? "이름 없음"));
 
@@ -71,7 +76,10 @@ public class BattleUI : MonoBehaviour
                 return;
             }
 
+            // 버튼 생성
             GameObject newButton = Instantiate(buttonPrefab, buttonContainer);
+            
+            // 버튼 텍스트 설정
             TextMeshProUGUI buttonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
 
             if (buttonText != null)
@@ -83,6 +91,7 @@ public class BattleUI : MonoBehaviour
                 Debug.LogError("buttonPrefab에 TextMeshProUGUI 컴포넌트가 없습니다.");
             }
 
+            // 버튼 클릭 이벤트 설정
             Button button = newButton.GetComponent<Button>();
             if (button != null)
             {
@@ -93,10 +102,25 @@ public class BattleUI : MonoBehaviour
             {
                 Debug.LogError("buttonPrefab에 Button 컴포넌트가 없습니다.");
             }
-        }
 
-        // 배틀 상태 텍스트 업데이트
-        /*if (battleStatusText != null)
+			// 버튼 좌표 출력
+			if (newButton != null) {
+				buttonCreated = true; // 버튼이 생성되었음을 확인
+				Vector3 buttonPosition = newButton.transform.position;
+				Debug.Log($"버튼 생성됨: {teammate.teammateName}, 위치: {buttonPosition}");
+			}
+
+		}
+
+		// 버튼 생성 여부 확인
+		if (!buttonCreated) {
+			Debug.LogError("버튼 생성 안됨");
+		}
+
+		Debug.Log("GenerateTeammateButtons 완료");
+
+		// 배틀 상태 텍스트 업데이트
+		/*if (battleStatusText != null)
         {
             battleStatusText.text = "배틀 준비 중...";
         }
@@ -106,10 +130,10 @@ public class BattleUI : MonoBehaviour
         }
 
         Debug.Log("GenerateTeammateButtons 완료");*/
-    }
+	}
 
-    // 버튼 클릭 시 호출되는 메서드
-    void OnTeammateButtonClick(Teammate clickedTeammate)
+	// 버튼 클릭 시 호출되는 메서드
+	void OnTeammateButtonClick(Teammate clickedTeammate)
     {
         Debug.Log(clickedTeammate.teammateName + "의 버튼이 클릭되었습니다.");
         // 클릭 후 추가 로직 (예: 스킬 사용, 공격 등)
