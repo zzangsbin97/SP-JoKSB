@@ -1,56 +1,52 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TeammateManager : MonoBehaviour
 {
-    public static TeammateManager Instance { get; private set; }
-    public List<Teammate> teammates = new List<Teammate>();
+    public List<Teammate> teammates = new List<Teammate>(); // 현재 팀에 있는 동료 목록
 
-
-
-    public void AddTeammate(Teammate teammate)
-    {
-        if (!teammates.Contains(teammate))
-        {
-            teammates.Add(teammate);
-            Debug.Log(teammate.teammateName + "이(가) 팀에 추가되었습니다.");
-        }
-        else
-        {
-            Debug.Log("현재 팀에 추가되어있지 않음");
-        }
-
-    }
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        Teammate kimSubin = new GameObject("kimsubin").AddComponent<Teammate>();
-        kimSubin.teammateName = "kimsubin";
-        AddTeammate(kimSubin);
-    }
+        // 새로운 Teammate 생성
+        GameObject teammateObject = new GameObject("kimsubin");
+        Teammate kimsubin = teammateObject.AddComponent<Teammate>();
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Teammate 초기화
+        kimsubin.InitializeTeammate("kimsubin");
+
+        // 팀 목록에 추가
+        AddTeammate(kimsubin);
+
+        Debug.Log($"이름: {kimsubin.teammateName}, 체력: {kimsubin.maxHP}, 공격력: {kimsubin.attackPower}, 스킬: {kimsubin.skills}");
+
+        Debug.Log("Teammates in TeammateManager:");
+        foreach (var teammate in teammates)
+        {
+            Debug.Log(teammate.teammateName);
+        }
 
     }
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬 전환 시에도 유지
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+
+
+            DontDestroyOnLoad(gameObject);
+      
+
     }
 
+    public void AddTeammate(Teammate teammate)
+    {
+        // 이미 팀에 추가된 동료인지 확인
+        if (teammates.Exists(t => t.teammateName == teammate.teammateName))
+        {
+            Debug.LogWarning($"{teammate.teammateName}은(는) 이미 팀에 추가되어 있습니다.");
+            return;
+        }
 
+        // 팀 목록에 추가
+        teammates.Add(teammate);
+
+        Debug.Log($"{teammate.teammateName}이(가) 팀에 추가되었습니다.");
+    }
 }

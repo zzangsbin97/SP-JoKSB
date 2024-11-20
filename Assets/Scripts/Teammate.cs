@@ -1,98 +1,105 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Teammate : MonoBehaviour
 {
-    public int maxHP; // 이것도 몇으로 할지
+    public int maxHP;
     public int speed;
-    public int standGauge = 50; // 못정했삼
+    public int standGauge = 50;
     public int attackPower;
-    public double defensePercentTeammate = 10.0f; // 방어력을 10%로 초기화
-    public bool skillsInitialized = false;
-    // 각 동료별 이름 만들어서...
+    public double defensePercentTeammate;
     public string teammateName;
-
-    // 스킬 넣을 리스트 생성
     public List<Skill> skills = new List<Skill>();
-
+    public bool skillsInitialized = false;
     public bool IsInMyTeam = false;
-    private TeammateManager teammateManager;
 
-    /*void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("일단충돌함...");
-        Player player = other.GetComponent<Player>();
-
-        if (player != null) {
-            Debug.Log(teammateName);
-            (this.gameObject.activeSelf != false) {
-                IsInMyTeam = true;
-                teammateManager.AddTeammate(this);
-            } 
+    private static readonly Dictionary<string, TeammateData> teammateDataDict = new Dictionary<string, TeammateData>
+    {
+        {
+            "kimsubin",
+            new TeammateData(220, 100, 200, 10.0, new List<Skill>
+            {
+                new Skill("번개같은 이동", 110, 0.0, 0),
+                new Skill("강력한 펀치", 180, 0.0, 0),
+                new Skill("스타 플래티넘 러쉬", 430, 0.0, 0)
+            })
+        },
+        {
+            "오정훈",
+            new TeammateData(190, 120, 120, 10.0, new List<Skill>
+            {
+                new Skill("화염구", 90, 0.0, 0),
+                new Skill("불꽃의 일격", 230, 0.0, 0),
+                new Skill("지옥의 불꽃", 490, 0.0, 0)
+            })
+        },
+        {
+            "조정훈",
+            new TeammateData(270, 90, 90, 10.0, new List<Skill>
+            {
+                new Skill("대지의 결의", 0, 20.0, 0),
+                new Skill("강인한 의지", 0, 0.0, 0),
+                new Skill("대지의 분노", 280, 0.0, 0)
+            })
+        },
+        {
+            "유재민",
+            new TeammateData(200, 80, 180, 10.0, new List<Skill>
+            {
+                new Skill("전기 충격", 120, 0.0, 0),
+                new Skill("전기 강화", 0, 0.0, 0),
+                new Skill("천둥의 심판", 350, 0.0, 0)
+            })
+        },
+        {
+            "최동욱 & 나비",
+            new TeammateData(180, 80, 120, 10.0, new List<Skill>
+            {
+                new Skill("치유의 바람", 0, 0.0, 0),
+                new Skill("바람의 쇄도", 100, 0.0, 0),
+                new Skill("회복의 신풍", 0, 0.0, 0)
+            })
         }
-    }*/
+    };
 
-    // Start is called before the first frame update
     void Start()
     {
-        teammateManager = FindObjectOfType<TeammateManager>();
+        InitializeTeammate(teammateName);
     }
 
     public void InitializeTeammate(string name)
     {
-        
-
-        teammateName = name;
-        switch (teammateName)
+        if (teammateDataDict.TryGetValue(name, out TeammateData data))
         {
-            case "kimsubin":
-                maxHP = 220;
-                attackPower = 100;
-                speed = 200;
-                defensePercentTeammate = 10.0f;
-                skills.Add(new Skill("번개같은 이동", 110, 0.0, 0));
-                skills.Add(new Skill("강력한 펀치", 180, 0.0, 0));
-                skills.Add(new Skill("스타 플래티넘 러쉬", 430, 0.0, 0));
-                break;
-            case "오정훈":
-                maxHP = 190;
-                attackPower = 120;
-                speed = 120;
-                defensePercentTeammate = 10.0f;
-                skills.Add(new Skill("화염구", 90, 0.0, 0));
-                skills.Add(new Skill("불꽃의 일격", 230, 0.0, 0));
-                skills.Add(new Skill("지옥의 불꽃", 490, 0.0, 0));
-                break;
-            case "조정훈":
-                maxHP = 270;
-                attackPower = 90;
-                speed = 90;
-                defensePercentTeammate = 10.0f;
-                skills.Add(new Skill("대지의 결의", 0, 20.0, 0));
-                skills.Add(new Skill("강인한 의지", 0, 0.0, 0));
-                skills.Add(new Skill("대지의 분노", 280, 0.0, 0));
-                break;
-            case "유재민":
-                maxHP = 200;
-                attackPower = 80;
-                speed = 180;
-                defensePercentTeammate = 10.0f;
-                skills.Add(new Skill("전기 충격", 120, 0.0, 0));
-                skills.Add(new Skill("전기 강화", 0, 0.0, 0));
-                skills.Add(new Skill("천둥의 심판", 350, 0.0, 0));
-                break;
-            case "최동욱 & 나비":
-                maxHP = 180;
-                attackPower = 80;
-                speed = 120;
-                defensePercentTeammate = 10.0f;
-                skills.Add(new Skill("치유의 바람", 0, 0.0, 0));
-                skills.Add(new Skill("바람의 쇄도", 100, 0.0, 0));
-                skills.Add(new Skill("회복의 신풍", 0, 0.0, 0));
-                break;
+            teammateName = name;
+            maxHP = data.MaxHP;
+            attackPower = data.AttackPower;
+            speed = data.Speed;
+            defensePercentTeammate = data.DefensePercent;
+            skills = new List<Skill>(data.Skills);
+            skillsInitialized = true;
         }
-        skillsInitialized = true;
+        else
+        {
+            Debug.LogError($"Teammate data for {name} not found!");
+        }
+    }
+
+    private class TeammateData
+    {
+        public int MaxHP { get; }
+        public int AttackPower { get; }
+        public int Speed { get; }
+        public double DefensePercent { get; }
+        public List<Skill> Skills { get; }
+
+        public TeammateData(int maxHP, int attackPower, int speed, double defensePercent, List<Skill> skills)
+        {
+            MaxHP = maxHP;
+            AttackPower = attackPower;
+            Speed = speed;
+            DefensePercent = defensePercent;
+            Skills = skills;
+        }
     }
 }
-
-

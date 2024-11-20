@@ -5,7 +5,7 @@ using TMPro;
 
 public class SkillButtonManager : MonoBehaviour
 {
-    public List<Button> buttons; // 이미 생성된 버튼 리스트
+    public List<Button> skillButtons = new List<Button>(); // 이미 생성된 버튼 리스트
 
     void Start()
     {
@@ -15,7 +15,7 @@ public class SkillButtonManager : MonoBehaviour
 
     public void DisableAllButtons()
     {
-        foreach (var button in buttons)
+        foreach (var button in skillButtons)
         {
             button.gameObject.SetActive(false); // 버튼 비활성화
         }
@@ -23,55 +23,52 @@ public class SkillButtonManager : MonoBehaviour
 
     public void ActivateSkillButtons(Teammate teammate)
     {
-        Debug.Log("ActivateSkillButtons() 호출됨");
-
-        if (teammate == null)
+        if (Object.ReferenceEquals(teammate, null))
         {
-            Debug.LogWarning("해당 동료가 존재하지 않습니다.");
+            Debug.LogError("전달된 Teammate는 Unity에서 삭제되었습니다.");
             DisableAllButtons();
             return;
         }
 
-        // 스킬이 없는 경우 초기화
-        if (teammate.skills.Count == 0)
+        Teammate ActiveTeammate = teammate;
+
+        Debug.Log($"ActivateSkillButtons 호출: 이름 = {ActiveTeammate.teammateName}, 체력 = {ActiveTeammate.maxHP}, 스킬 개수 = {ActiveTeammate.skills?.Count ?? 0}");
+
+        if (ActiveTeammate.skills == null || ActiveTeammate.skills.Count == 0)
         {
-            switch (teammate.teammateName)
-            {
-                case "kimsubin":
-                    teammate.skills.Add(new Skill("번개같은 이동", 110, 0.0, 0));
-                    teammate.skills.Add(new Skill("강력한 펀치", 180, 0.0, 0));
-                    teammate.skills.Add(new Skill("스타 플래티넘 러쉬", 430, 0.0, 0));
-                    break;
-            }
+            Debug.LogWarning($"{ActiveTeammate.teammateName}에게 스킬이 없습니다.");
+            DisableAllButtons();
+            return;
         }
 
-        // 스킬 버튼 설정
-        for (int i = 0; i < buttons.Count; i++)
+        for (int i = 0; i < skillButtons.Count; i++)
         {
-            if (i < teammate.skills.Count)
+            if (i < ActiveTeammate.skills.Count)
             {
-                Button button = buttons[i];
+                Button button = skillButtons[i];
                 button.gameObject.SetActive(true);
 
                 TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
                 if (buttonText != null)
                 {
-                    buttonText.text = teammate.skills[i].skillName;
+                    buttonText.text = ActiveTeammate.skills[i].skillName;
                 }
 
-                int skillIndex = i; // 클로저 문제 방지
+                Teammate capturedTeammate = ActiveTeammate;
+                int capturedIndex = i; // 클로저 문제 방지
                 button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => OnSkillButtonClicked(teammate.skills[skillIndex]));
+                button.onClick.AddListener(() => OnSkillButtonClicked(capturedTeammate.skills[capturedIndex]));
 
-                Debug.Log($"버튼 {i + 1} 활성화: {teammate.skills[i].skillName}");
+                Debug.Log($"버튼 {i + 1} 활성화: {ActiveTeammate.skills[i].skillName}");
             }
             else
             {
-                buttons[i].gameObject.SetActive(false);
+                skillButtons[i].gameObject.SetActive(false);
                 Debug.Log($"버튼 {i + 1} 비활성화");
             }
         }
     }
+
 
     private void OnSkillButtonClicked(Skill skill)
     {

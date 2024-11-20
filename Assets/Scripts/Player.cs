@@ -39,7 +39,7 @@ public class Player : MonoBehaviour {
 				{
 					Debug.Log(teammate.teammateName + "을(를) 찾았습니다!");
 					teammate.IsInMyTeam = true; // 팀에 추가 표시
-					teammateManager.AddTeammate(teammate); // TeammateManager에 추가
+					//teammateManager.AddTeammate(teammate); // TeammateManager에 추가
 					teammateDialogueManager.Talk(hit.collider.gameObject, teammate.teammateName);
 					hit.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 객체 비활성화
 				}
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour {
 	void Update() {
 
 		if ( (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space)) &&  isExist) {
-			teammateDialogueManager.Talk();
+			//teammateDialogueManager.Talk();
 		}
 	}
 }
