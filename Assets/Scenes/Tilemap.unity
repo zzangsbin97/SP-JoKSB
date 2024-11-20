@@ -1372,6 +1372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5a6a464910fd346aae0f63b6940440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 549956091}
+  IsTalking: 0
   talkText: {fileID: 1218594074}
   talkingTeammate: {fileID: 0}
 --- !u!4 &1367517778
@@ -140241,6 +140243,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 549956092}
     m_Modifications:
+    - target: {fileID: 5451944832554869107, guid: 8b268f4a2b56b074ca910ea97aa5b045, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 36c6fab279d08e146b42b0cd9a145845, type: 2}
+    - target: {fileID: 5451944832554869107, guid: 8b268f4a2b56b074ca910ea97aa5b045, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -871409624310546180, guid: 36c6fab279d08e146b42b0cd9a145845, type: 2}
+    - target: {fileID: 5451944832554869107, guid: 8b268f4a2b56b074ca910ea97aa5b045, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7134979712165833340, guid: 8b268f4a2b56b074ca910ea97aa5b045, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

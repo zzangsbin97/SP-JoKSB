@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	public int playerHP;
 	public int playerStandGauge;
 	public double deffensePercent;
+	public bool isExist;
 
 	public InputAction interAction; // 상호작용키
 	Rigidbody2D rigidbody2d;
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour {
 
 		foreach (var hit in hits) {
 			if (hit.collider != null) {
+				this.isExist = true;
 				Teammate teammate = hit.collider.gameObject.GetComponent<Teammate>();
 				if (teammate != null && !teammate.IsInMyTeam) // Teammate인지 확인하고 팀에 추가되지 않은 경우
 				{
@@ -42,6 +44,13 @@ public class Player : MonoBehaviour {
 					hit.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 객체 비활성화
 				}
 			}
+		}
+	}
+
+	void Update() {
+
+		if ( (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space)) &&  isExist) {
+			teammateDialogueManager.Talk();
 		}
 	}
 }
