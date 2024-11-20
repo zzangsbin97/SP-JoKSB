@@ -29,7 +29,9 @@ public class TeammateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Teammate kimSubin = new GameObject("kimsubin").AddComponent<Teammate>();
+        kimSubin.teammateName = "kimsubin";
+        AddTeammate(kimSubin);
     }
 
     // Update is called once per frame

@@ -87,7 +87,7 @@ public class ButtonManager : MonoBehaviour
         if (skillButtonManager != null)
         {
             Debug.Log("SkillButtonManager가 정상적으로 연결되었습니다.");
-            skillButtonManager.ActivateSkillButtons();
+            skillButtonManager.ActivateSkillButtons(teammate); // 동료 정보 전달
         }
         else
         {
