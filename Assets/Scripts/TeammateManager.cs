@@ -8,16 +8,25 @@ public class TeammateManager : MonoBehaviour
     void Start()
     {
         // »õ·Î¿î Teammate »ý¼º
-        GameObject teammateObject = new GameObject("kimsubin");
-        Teammate kimsubin = teammateObject.AddComponent<Teammate>();
+        GameObject teammateObject = new GameObject("±è¼öºó");
+        Teammate Teammate = teammateObject.AddComponent<Teammate>();
 
         // Teammate ÃÊ±âÈ­
-        kimsubin.InitializeTeammate("kimsubin");
+        Teammate.InitializeTeammate("±è¼öºó");
 
         // ÆÀ ¸ñ·Ï¿¡ Ãß°¡
-        AddTeammate(kimsubin);
+        AddTeammate(Teammate);
 
-        Debug.Log($"ÀÌ¸§: {kimsubin.teammateName}, Ã¼·Â: {kimsubin.maxHP}, °ø°Ý·Â: {kimsubin.attackPower}, ½ºÅ³: {kimsubin.skills}");
+        teammateObject = new GameObject("¿ÀÁ¤ÈÆ");
+        Teammate = teammateObject.AddComponent<Teammate>();
+        Teammate.InitializeTeammate("¿ÀÁ¤ÈÆ");
+        AddTeammate(Teammate);
+
+        /*teammateObject = new GameObject("À¯Àç¹Î");
+        Teammate = teammateObject.AddComponent<Teammate>();
+        Teammate.InitializeTeammate("À¯Àç¹Î");
+        AddTeammate(Teammate);*/
+
 
         Debug.Log("Teammates in TeammateManager:");
         foreach (var teammate in teammates)

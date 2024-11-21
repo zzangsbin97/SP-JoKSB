@@ -16,7 +16,7 @@ public class Teammate : MonoBehaviour
     private static readonly Dictionary<string, TeammateData> teammateDataDict = new Dictionary<string, TeammateData>
     {
         {
-            "kimsubin",
+            "±è¼öºó",
             new TeammateData(220, 100, 200, 10.0, new List<Skill>
             {
                 new Skill("¹ø°³°°Àº ÀÌµ¿", 110, 0.0, 0),
