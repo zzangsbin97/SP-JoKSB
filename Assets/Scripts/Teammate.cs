@@ -13,10 +13,25 @@ public class Teammate : MonoBehaviour
     public bool skillsInitialized = false;
     public bool IsInMyTeam = false;
 
+
+
+    /*void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("일단충돌함...");
+        Player player = other.GetComponent<Player>();
+
+        if (player != null) {
+            Debug.Log(teammateName);
+            (this.gameObject.activeSelf != false) {
+                IsInMyTeam = true;
+                teammateManager.AddTeammate(this);
+            } */
+ 
+
+
     private static readonly Dictionary<string, TeammateData> teammateDataDict = new Dictionary<string, TeammateData>
     {
         {
-            "kimsubin",
+            "김수빈",
             new TeammateData(220, 100, 200, 10.0, new List<Skill>
             {
                 new Skill("번개같은 이동", 110, 0.0, 0),
