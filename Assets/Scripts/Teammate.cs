@@ -13,6 +13,21 @@ public class Teammate : MonoBehaviour
     public bool skillsInitialized = false;
     public bool IsInMyTeam = false;
 
+
+
+    /*void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("일단충돌함...");
+        Player player = other.GetComponent<Player>();
+
+        if (player != null) {
+            Debug.Log(teammateName);
+            (this.gameObject.activeSelf != false) {
+                IsInMyTeam = true;
+                teammateManager.AddTeammate(this);
+            } */
+ 
+
+
     private static readonly Dictionary<string, TeammateData> teammateDataDict = new Dictionary<string, TeammateData>
     {
         {

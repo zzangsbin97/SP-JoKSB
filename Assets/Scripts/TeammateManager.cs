@@ -7,12 +7,14 @@ public class TeammateManager : MonoBehaviour
 
     void Start()
     {
+
         // 새로운 Teammate 생성
         GameObject teammateObject = new GameObject("김수빈");
         Teammate Teammate = teammateObject.AddComponent<Teammate>();
 
         // Teammate 초기화
         Teammate.InitializeTeammate("김수빈");
+
 
         // 팀 목록에 추가
         AddTeammate(Teammate);
@@ -22,28 +24,33 @@ public class TeammateManager : MonoBehaviour
         Teammate.InitializeTeammate("오정훈");
         AddTeammate(Teammate);
 
-        /*teammateObject = new GameObject("유재민");
+        teammateObject = new GameObject("유재민");
         Teammate = teammateObject.AddComponent<Teammate>();
         Teammate.InitializeTeammate("유재민");
-        AddTeammate(Teammate);*/
-
-
-        Debug.Log("Teammates in TeammateManager:");
-        foreach (var teammate in teammates)
-        {
-            Debug.Log(teammate.teammateName);
-        }
-
-    }
-    void Awake()
-    {
-
-
-            DontDestroyOnLoad(gameObject);
-      
-
+        AddTeammate(Teammate);
     }
 
+     void Update()
+     {
+            
+
+
+
+            Debug.Log("Teammates in TeammateManager:");
+            foreach (var teammate in teammates)
+            {
+                Debug.Log(teammate.teammateName);
+            }
+
+     }
+     void Awake()
+     {
+
+
+        DontDestroyOnLoad(gameObject);
+
+
+     }
     public void AddTeammate(Teammate teammate)
     {
         // 이미 팀에 추가된 동료인지 확인
@@ -59,3 +66,5 @@ public class TeammateManager : MonoBehaviour
         Debug.Log($"{teammate.teammateName}이(가) 팀에 추가되었습니다.");
     }
 }
+    
+
