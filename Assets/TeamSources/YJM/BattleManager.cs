@@ -5,7 +5,9 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance { get; private set; }
     public TeammateManager teammateManager; // Unity Editor에서 연결 가능
+    public MonsterManager monsterManager; // Unity Editor에서 연결 가능
     public List<Teammate> battleTeammates = new List<Teammate>();
+    public Monster battleMonster; // 배틀에 등장하는 몬스터
 
     void Awake()
     {
@@ -28,43 +30,68 @@ public class BattleManager : MonoBehaviour
             teammateManager = FindObjectOfType<TeammateManager>();
         }
 
+        if (monsterManager == null)
+        {
+            monsterManager = FindObjectOfType<MonsterManager>();
+        }
+
         if (teammateManager == null)
         {
             Debug.LogError("TeammateManager를 찾을 수 없습니다! 씬에 TeammateManager를 추가했는지 확인하세요.");
             return;
         }
 
-        // TeammateManager 초기화가 완료될 때까지 기다림
-        StartCoroutine(InitializeBattleTeammatesAfterManagerReady());
-    }
-
-    private System.Collections.IEnumerator InitializeBattleTeammatesAfterManagerReady()
-    {
-        // TeammateManager가 초기화될 때까지 기다림
-        while (teammateManager.teammates.Count == 0)
+        if (monsterManager == null)
         {
-            Debug.Log("TeammateManager 초기화 대기 중...");
-            yield return null; // 다음 프레임까지 대기
+            Debug.LogError("MonsterManager를 찾을 수 없습니다! 씬에 MonsterManager를 추가했는지 확인하세요.");
+            return;
         }
-
-        // Teammates 데이터를 BattleTeammates로 복사
+        // Teammates와 Monster 초기화
         InitializeBattleTeammates();
-        PrintBattleTeammates();
+        InitializeBattleMonster();
 
-        Debug.Log("BattleTeammates in BattleManager:");
-        foreach (var teammate in battleTeammates)
-        {
-            Debug.Log(teammate.teammateName);
-        }
     }
+
+
+
+
 
     private void InitializeBattleTeammates()
     {
         battleTeammates = new List<Teammate>(teammateManager.teammates);
-        Debug.Log($"이름: {battleTeammates[0].teammateName}, 체력: {battleTeammates[0].maxHP}, 공격력: {battleTeammates[0].attackPower}, 스킬: {battleTeammates[0].skills}");
-        Debug.Log("BattleTeammates가 초기화되었습니다.");
+        Debug.Log($"Teammates initialized: {battleTeammates.Count}명");
+        foreach (var teammate in battleTeammates)
+        {
+            Debug.Log($"동료: {teammate.teammateName}, HP: {teammate.maxHP}, 공격력: {teammate.attackPower}");
+        }
     }
 
+    private void InitializeBattleMonster()
+    {
+        if (monsterManager == null)
+        {
+            Debug.LogError("monsterManager가 null입니다!");
+            return;
+        }
+
+        if (monsterManager.currentMonster == null)
+        {
+            Debug.LogError("monsterManager의 currentMonster가 null입니다!");
+            return;
+        }
+
+        Monster battleMonster = monsterManager.currentMonster;
+
+        if (battleMonster != null)
+        {
+            Debug.Log($"배틀에 등장한 몬스터: {battleMonster.MonsterName}");
+            Debug.Log($"HP: {battleMonster.maxHP}, 공격력: {battleMonster.attackPower}, 스킬 개수: {battleMonster.skills.Count}");
+        }
+        else
+        {
+            Debug.LogWarning("현재 배틀에 사용할 몬스터가 없습니다!");
+        }
+    }
     private void PrintBattleTeammates()
     {
         if (battleTeammates.Count == 0)
@@ -77,5 +104,17 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log($"배틀에 참여한 동료: {teammate.teammateName}");
         }
+    }
+    private void PrintBattleMonster()
+    {
+
+
+        Debug.Log($"배틀에 참여한 몬스터: {battleMonster.MonsterName}");
+
+    }
+
+    void Update()
+    {
+        
     }
 }
