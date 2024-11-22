@@ -34,14 +34,6 @@ public class TeammateManager : MonoBehaviour
      {
             
 
-
-
-            Debug.Log("Teammates in TeammateManager:");
-            foreach (var teammate in teammates)
-            {
-                Debug.Log(teammate.teammateName);
-            }
-
      }
      void Awake()
      {
