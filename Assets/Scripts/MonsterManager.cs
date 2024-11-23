@@ -9,10 +9,10 @@ public class MonsterManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject MonsterObject = new GameObject("김규석");
+        GameObject MonsterObject = new GameObject("외계인 정예병");
         Monster monster = MonsterObject.AddComponent<Monster>();
 
-        monster.InitializeMonster("김규석");
+        monster.InitializeMonster("외계인 정예병");
 
         currentMonster = monster;
         Debug.Log($"배틀에 등장한 몬스터: {currentMonster.MonsterName}");

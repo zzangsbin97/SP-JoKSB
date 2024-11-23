@@ -18,11 +18,38 @@ public class Monster : MonoBehaviour
     {
         {
             "김규석",
-            new MonsterData(1200, 150, 130, 10.0, new List<Skill>
+            new MonsterData(1800, 150, 130, 10.0, new List<Skill>
             {
                 new Skill("얼음 창", 80, 0.0, 0),
                 new Skill("혹한의 바람", 60, 0.0, 0),
                 new Skill("절대 영도", 120, 0.0, 0)
+            })
+        },
+        {
+            "외계인 하급전사",
+            new MonsterData(420, 40, 90, 10.0, new List<Skill>
+            {
+                new Skill("강렬하게 휘두르기", 120, 0.0, 0),
+                new Skill("공포의 외침", 0, 0.0, 0)
+
+            })
+        },
+        {
+            "외계인 척후병",
+            new MonsterData(800, 100, 150, 15.0, new List<Skill>
+            {
+                new Skill("방해의 광선", 80, 0.0, 0),
+                new Skill("고속 돌진", 180, 0.0, 0),
+                new Skill("스텔스 어택",120,0.0,0)
+            })
+        },
+        {
+            "외계인 정예병",
+            new MonsterData(1200, 80, 100, 15.0, new List<Skill>
+            {
+                new Skill("충격파", 150, 0.0, 0),
+                new Skill("광역 방해", 0, 0.0, 0),
+                new Skill("대폭발",170,0.0,0)
             })
         }
     };
