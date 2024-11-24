@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     public int speed;
     public int standGauge = 50;
     public int attackPower;
+    public int currentHP;
     public double defensePercent;
     public string MonsterName;
     public List<Skill> skills = new List<Skill>();
@@ -56,7 +57,7 @@ public class Monster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentHP = maxHP;
     }
 
     public void InitializeMonster(string name)

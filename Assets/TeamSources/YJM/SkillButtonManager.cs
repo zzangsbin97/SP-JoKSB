@@ -6,9 +6,17 @@ using TMPro;
 public class SkillButtonManager : MonoBehaviour
 {
     public List<Button> skillButtons = new List<Button>(); // 이미 생성된 버튼 리스트
-
+    public BattleManager battleManager;
+    public Teammate ActiveTeammate;
+    public Skill skill;
     void Start()
     {
+        battleManager = BattleManager.Instance;
+        if (battleManager == null)
+        {
+            Debug.LogError("BattleManager가 초기화되지 않았습니다!");
+        }
+
         // 시작 시 모든 버튼 비활성화
         DisableAllButtons();
     }
@@ -30,7 +38,7 @@ public class SkillButtonManager : MonoBehaviour
             return;
         }
 
-        Teammate ActiveTeammate = teammate;
+        ActiveTeammate = teammate;
 
         Debug.Log($"ActivateSkillButtons 호출: 이름 = {ActiveTeammate.teammateName}, 체력 = {ActiveTeammate.maxHP}, 스킬 개수 = {ActiveTeammate.skills?.Count ?? 0}");
 
@@ -54,10 +62,11 @@ public class SkillButtonManager : MonoBehaviour
                     buttonText.text = ActiveTeammate.skills[i].skillName;
                 }
 
-                Teammate capturedTeammate = ActiveTeammate;
+                
                 int capturedIndex = i; // 클로저 문제 방지
+                
                 button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => OnSkillButtonClicked(capturedTeammate.skills[capturedIndex]));
+                button.onClick.AddListener(() => OnSkillButtonClicked(ActiveTeammate,ActiveTeammate.skills[capturedIndex]));
 
                 Debug.Log($"버튼 {i + 1} 활성화: {ActiveTeammate.skills[i].skillName}");
             }
@@ -70,9 +79,22 @@ public class SkillButtonManager : MonoBehaviour
     }
 
 
-    private void OnSkillButtonClicked(Skill skill)
+    public void OnSkillButtonClicked(Teammate Teammate,Skill skill)
     {
+        Debug.Log($"OnSkillButtonClicked호출: 이름 = {ActiveTeammate.teammateName}, 체력 = {ActiveTeammate.maxHP}, 스킬 개수 = {ActiveTeammate.skills?.Count ?? 0}");
         Debug.Log($"스킬 '{skill.skillName}' 버튼 클릭됨");
+        Debug.Log($"스킬의 정보 : 이름 : {skill.skillName}, 공격력 : {skill.attackPower}, 방어력 증가 : {skill.defensePercent}, 버프 : {skill.buffConst} ");
+        if (ActiveTeammate == null)
+        {
+            Debug.LogError("SkillButtonManager에서 전달된 teammate이 null입니다!");
+        }
+
+        if (skill == null)
+        {
+            Debug.LogError("SkillButtonManager에서 전달된 skill이 null입니다!");
+        }
+
+        BattleManager.Instance.ApplySkillDamage(ActiveTeammate, skill);
         // 스킬 사용 로직 구현
     }
 }
