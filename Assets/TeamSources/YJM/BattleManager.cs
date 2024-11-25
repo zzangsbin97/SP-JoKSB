@@ -24,6 +24,8 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
+
+
         // TeammateManager가 연결되지 않았다면 FindObjectOfType로 찾음
         if (teammateManager == null)
         {
@@ -49,10 +51,45 @@ public class BattleManager : MonoBehaviour
         // Teammates와 Monster 초기화
         InitializeBattleTeammates();
         InitializeBattleMonster();
+        PrintBattleTeammates();
+
 
     }
 
 
+    public void ApplySkillDamage(Teammate teammate, Skill skill)
+    {
+        if (battleMonster == null)
+        {
+            Debug.LogWarning("battleMonster가 null입니다. InitializeBattleMonster()를 다시 호출합니다.");
+            InitializeBattleMonster();
+
+            if (battleMonster == null)
+            {
+                Debug.LogError("InitializeBattleMonster 호출 후에도 battleMonster가 null입니다!");
+                return;
+            }
+        }
+
+        if (teammate == null)
+        {
+            Debug.LogError("Teammate null입니다!");
+            return;
+        }
+        if (skill == null)
+        {
+            Debug.LogError("Skill이 null입니다!");
+            return;
+        }
+
+        // 스킬 데미지 계산
+        float damage = skill.attackPower * teammate.attackPower;
+        battleMonster.currentHP -= Mathf.RoundToInt(damage);
+
+        Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
+        Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {damage}의 데미지를 입혔습니다!");
+        Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
+    }
 
 
 
@@ -80,7 +117,7 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-        Monster battleMonster = monsterManager.currentMonster;
+        battleMonster = monsterManager.currentMonster;
 
         if (battleMonster != null)
         {
