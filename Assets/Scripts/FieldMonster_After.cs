@@ -25,6 +25,7 @@ public class FieldMonster_After : MonoBehaviour {
 
 	// Start is called before the first frame update
 	void Start() {
+		FieldMonster_After fieldmonster_after = GetComponent<FieldMonster_After>();
 		currentHP = maxHP;
 		InitializeMonsterData();
 		InitializeMonster("외계인 정예병");

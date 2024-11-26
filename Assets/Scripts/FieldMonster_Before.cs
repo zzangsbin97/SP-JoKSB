@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class FieldMonster_Before : MonoBehaviour {
 	public int maxHP;
@@ -22,6 +21,7 @@ public class FieldMonster_Before : MonoBehaviour {
 	}
 
 	void Start() {
+		FieldMonster_Before fieldmonster_before = GetComponent<FieldMonster_Before>();
 		currentHP = maxHP;
 		InitializeMonsterData(); // 동적 초기화
 		InitializeMonster("외계인 하급전사");
