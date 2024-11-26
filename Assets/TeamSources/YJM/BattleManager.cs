@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BattleManager : MonoBehaviour
 {
@@ -151,6 +152,14 @@ public class BattleManager : MonoBehaviour
 
 
         Debug.Log($"배틀에 참여한 몬스터: {battleMonster.MonsterName}");
+
+    }
+
+    public double RandomDamage(int startPercent, int endPercent, int baseAttackPower) {
+        System.Random rand = new System.Random();
+        double randPercent = rand.Next(startPercent, endPercent) / 100;
+
+        return randPercent * baseAttackPower;
 
     }
 
