@@ -89,6 +89,10 @@ public class BattleManager : MonoBehaviour
         Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
         Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {damage}의 데미지를 입혔습니다!");
         Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
+        if(battleMonster.currentHP <= 0)
+        {
+            Debug.Log($"{battleMonster.MonsterName}이 죽었습니다.");
+        }
     }
 
 
