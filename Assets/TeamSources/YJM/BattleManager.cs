@@ -84,7 +84,7 @@ public class BattleManager : MonoBehaviour
         }
 
         // 스킬 데미지 계산
-        double damage = (skill.attackPercent * teammate.attackPercent);
+        double damage = (skill.attackDamage * teammate.attackPercent);
         battleMonster.currentHP -= Mathf.RoundToInt((float)damage);
 
         Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");

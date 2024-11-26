@@ -1,44 +1,51 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
-public class FieldMonster_Before : MonoBehaviour
-{
-	public int maxHP = 420;
-	public int speed = 90;
-	public int standGauge = 50;
-	public int attackPower = 40;
+public class FieldMonster_Before : MonoBehaviour {
+	public int maxHP;
+	public int speed;
+	public int standGauge;
+	public int attackPower;
 	public int currentHP;
-	public double defensePercent = 10;
+	public double defensePercent;
 	public string MonsterName;
 	public List<Skill> skills = new List<Skill>();
 	public bool skillsInitialized = false;
 
-	// Start is called before the first frame update
-	void Start()
-    {
+	private Dictionary<string, MonsterData_Before> monsterDataDict;
+
+	public double RandomDamage(int startPercent, int endPercent, int baseAttackPower) {
+		System.Random rand = new System.Random();
+		double randPercent = rand.Next(startPercent, endPercent) / 100.0;
+		return randPercent * baseAttackPower;
+	}
+
+	void Start() {
 		currentHP = maxHP;
-    }
+		InitializeMonsterData(); // 동적 초기화
+		InitializeMonster("외계인 하급전사");
+	}
 
-	private static readonly Dictionary<string, MonsterData_Before> MonsterDataDict = new Dictionary<string, MonsterData_Before> {
-		{ "외계인 하급전사",
-			new MonsterData_Before(420, 40, 90, 10, new List<Skill> {
-				new Skill("강렬하게 휘두르기", 120, 0.0, 0)
-
-			})
-		}
-
-	};
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private void InitializeMonsterData() {
+		monsterDataDict = new Dictionary<string, MonsterData_Before> {
+			{
+				"외계인 하급전사",
+				new MonsterData_Before(
+					maxHP: 420,
+					attackPower: 40, // 인스턴스 메서드 호출
+                    speed: 90,
+					defensePercent: 10,
+					skills: new List<Skill> {
+						new Skill("강렬하게 휘두르기", (int)RandomDamage(80, 120, this.attackPower), 0.0, 0)
+					}
+				)
+			}
+		};
+	}
 
 	public void InitializeMonster(string name) {
-		if (MonsterDataDict.TryGetValue(name, out MonsterData_Before data)) {
+		if (monsterDataDict.TryGetValue(name, out MonsterData_Before data)) {
 			MonsterName = name;
 			maxHP = data.MaxHP;
 			attackPower = data.AttackPower;
@@ -47,7 +54,7 @@ public class FieldMonster_Before : MonoBehaviour
 			skills = new List<Skill>(data.Skills);
 			skillsInitialized = true;
 		} else {
-			Debug.LogError($"Teammate data for {name} not found!");
+			Debug.LogError($"Monster data for {name} not found!");
 		}
 	}
 

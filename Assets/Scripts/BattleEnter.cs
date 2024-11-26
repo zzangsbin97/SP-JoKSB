@@ -21,7 +21,10 @@ public class BattleEnter : MonoBehaviour
         // if (other.CompareTag("Monster"))
         if (other.gameObject.layer == LayerMask.NameToLayer("FieldMonster")){
             FieldMonster_Before monster_b = other.gameObject.GetComponent<FieldMonster_Before>();
+            Debug.Log(monster_b.MonsterName + " " + monster_b.attackPower);
+
 			FieldMonster_After monster_a = other.gameObject.GetComponent<FieldMonster_After>();
+			Debug.Log(monster_a.MonsterName + " " + monster_a.attackPower);
 			// Debug.Log(monster.name);
 			Debug.Log("Monster류와 충돌 -> Battle 씬으로 이동");
             SceneManager.LoadScene("Battle"); // Battle 씬으로 전환
