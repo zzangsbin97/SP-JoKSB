@@ -42,7 +42,7 @@ public class ButtonManager : MonoBehaviour
     {
         // BattleManager에서 동료 데이터를 가져옴
         List<Teammate> teammates = new List<Teammate>(battleManager.battleTeammates);
-        Debug.Log($"이름: {teammates[0].teammateName}, 체력: {teammates[0].maxHP}, 공격력: {teammates[0].attackPower}, 스킬: {teammates[0].skills}");
+        Debug.Log($"이름: {teammates[0].teammateName}, 체력: {teammates[0].maxHP}, 공격력: {teammates[0].attackPercent}, 스킬: {teammates[0].skills}");
         if (teammates == null || teammates.Count == 0)
         {
             Debug.LogWarning("BattleManager에 동료 데이터가 없습니다.");

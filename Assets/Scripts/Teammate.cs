@@ -6,7 +6,7 @@ public class Teammate : MonoBehaviour
     public int maxHP;
     public int speed;
     public int standGauge = 50;
-    public int attackPower;
+    public double attackPercent;
     public double defensePercentTeammate;
     public string teammateName;
     public List<Skill> skills = new List<Skill>();
@@ -34,18 +34,18 @@ public class Teammate : MonoBehaviour
             "김수빈",
             new TeammateData(220, 100, 200, 10.0, new List<Skill>
             {
-                new Skill("번개같은 이동", 110, 0.0, 0),
-                new Skill("강력한 펀치", 180, 0.0, 0),
-                new Skill("스타 플래티넘 러쉬", 430, 0.0, 0)
+                new Skill("번개같은 이동", 1.1, 0.0, 0),
+                new Skill("강력한 펀치", 1.8, 0.0, 0),
+                new Skill("스타 플래티넘 러쉬", 4.3, 0.0, 0)
             })
         },
         {
             "오정훈",
             new TeammateData(190, 120, 120, 10.0, new List<Skill>
             {
-                new Skill("화염구", 90, 0.0, 0),
-                new Skill("불꽃의 일격", 230, 0.0, 0),
-                new Skill("지옥의 불꽃", 490, 0.0, 0)
+                new Skill("화염구", 0.9, 0.0, 0),
+                new Skill("불꽃의 일격", 2.3, 0.0, 0),
+                new Skill("지옥의 불꽃", 49, 0.0, 0)
             })
         },
         {
@@ -54,16 +54,16 @@ public class Teammate : MonoBehaviour
             {
                 new Skill("대지의 결의", 0, 20.0, 0),
                 new Skill("강인한 의지", 0, 0.0, 0),
-                new Skill("대지의 분노", 280, 0.0, 0)
+                new Skill("대지의 분노", 2.8, 0.0, 0)
             })
         },
         {
             "유재민",
             new TeammateData(200, 80, 180, 10.0, new List<Skill>
             {
-                new Skill("전기 충격", 120, 0.0, 0),
+                new Skill("전기 충격", 1.2, 0.0, 0),
                 new Skill("전기 강화", 0, 0.0, 0),
-                new Skill("천둥의 심판", 350, 0.0, 0)
+                new Skill("천둥의 심판", 3.5, 0.0, 0)
             })
         },
         {
@@ -71,7 +71,7 @@ public class Teammate : MonoBehaviour
             new TeammateData(180, 80, 120, 10.0, new List<Skill>
             {
                 new Skill("치유의 바람", 0, 0.0, 0),
-                new Skill("바람의 쇄도", 100, 0.0, 0),
+                new Skill("바람의 쇄도", 1, 0.0, 0),
                 new Skill("회복의 신풍", 0, 0.0, 0)
             })
         }
@@ -88,7 +88,7 @@ public class Teammate : MonoBehaviour
         {
             teammateName = name;
             maxHP = data.MaxHP;
-            attackPower = data.AttackPower;
+            attackPercent = data.AttackPercent;
             speed = data.Speed;
             defensePercentTeammate = data.DefensePercent;
             skills = new List<Skill>(data.Skills);
@@ -103,15 +103,15 @@ public class Teammate : MonoBehaviour
     private class TeammateData
     {
         public int MaxHP { get; }
-        public int AttackPower { get; }
+        public double AttackPercent { get; }
         public int Speed { get; }
         public double DefensePercent { get; }
         public List<Skill> Skills { get; }
 
-        public TeammateData(int maxHP, int attackPower, int speed, double defensePercent, List<Skill> skills)
+        public TeammateData(int maxHP, double attackPercent, int speed, double defensePercent, List<Skill> skills)
         {
             MaxHP = maxHP;
-            AttackPower = attackPower;
+            AttackPercent = attackPercent;
             Speed = speed;
             DefensePercent = defensePercent;
             Skills = skills;

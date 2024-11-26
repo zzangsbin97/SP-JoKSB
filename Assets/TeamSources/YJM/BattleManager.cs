@@ -83,8 +83,8 @@ public class BattleManager : MonoBehaviour
         }
 
         // 스킬 데미지 계산
-        float damage = (skill.attackPower * teammate.attackPower)/100;
-        battleMonster.currentHP -= Mathf.RoundToInt(damage);
+        double damage = (skill.attackPercent * teammate.attackPercent);
+        battleMonster.currentHP -= Mathf.RoundToInt((float)damage);
 
         Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
         Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {damage}의 데미지를 입혔습니다!");
@@ -103,7 +103,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log($"Teammates initialized: {battleTeammates.Count}명");
         foreach (var teammate in battleTeammates)
         {
-            Debug.Log($"동료: {teammate.teammateName}, HP: {teammate.maxHP}, 공격력: {teammate.attackPower}");
+            Debug.Log($"동료: {teammate.teammateName}, HP: {teammate.maxHP}, 공격력: {teammate.attackPercent}");
         }
     }
 
