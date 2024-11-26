@@ -81,10 +81,10 @@ public class SkillButtonManager : MonoBehaviour
 
     public void OnSkillButtonClicked(Teammate Teammate,Skill skill)
     {
-        Debug.Log($"OnSkillButtonClicked호출: 이름 = {ActiveTeammate.teammateName}, 체력 = {ActiveTeammate.maxHP}, 스킬 개수 = {ActiveTeammate.skills?.Count ?? 0}");
+        Debug.Log($"OnSkillButtonClicked호출: 이름 = {Teammate.teammateName}, 체력 = {Teammate.maxHP}, 스킬 개수 = {Teammate.skills?.Count ?? 0}");
         Debug.Log($"스킬 '{skill.skillName}' 버튼 클릭됨");
         Debug.Log($"스킬의 정보 : 이름 : {skill.skillName}, 공격력 : {skill.attackPower}, 방어력 증가 : {skill.defensePercent}, 버프 : {skill.buffConst} ");
-        if (ActiveTeammate == null)
+        if (Teammate.teammateName == null)
         {
             Debug.LogError("SkillButtonManager에서 전달된 teammate이 null입니다!");
         }
@@ -94,7 +94,7 @@ public class SkillButtonManager : MonoBehaviour
             Debug.LogError("SkillButtonManager에서 전달된 skill이 null입니다!");
         }
 
-        BattleManager.Instance.ApplySkillDamage(ActiveTeammate, skill);
+        BattleManager.Instance.ApplySkillDamage(Teammate, skill);
         // 스킬 사용 로직 구현
     }
 }
