@@ -71,11 +71,11 @@ public class BattleManager : MonoBehaviour
             }
         }
 
-        if (teammate == null)
+        /*if (teammate == null)
         {
             Debug.LogError("Teammate null입니다!");
             return;
-        }
+        }*/
         if (skill == null)
         {
             Debug.LogError("Skill이 null입니다!");
@@ -83,7 +83,7 @@ public class BattleManager : MonoBehaviour
         }
 
         // 스킬 데미지 계산
-        float damage = skill.attackPower * teammate.attackPower;
+        float damage = (skill.attackPower * teammate.attackPower)/100;
         battleMonster.currentHP -= Mathf.RoundToInt(damage);
 
         Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
