@@ -13,6 +13,7 @@ public class Teammate : MonoBehaviour
     public List<Skill> skills = new List<Skill>();
     public bool skillsInitialized = false;
     public bool IsInMyTeam = false;
+    public bool stun = false; //기절 유무
 
 
 
@@ -35,45 +36,45 @@ public class Teammate : MonoBehaviour
             "김수빈",
             new TeammateData(220, 100, 200, 10.0, new List<Skill>
             {
-                new Skill("번개같은 이동", 1.1, 0.0, 0),
-                new Skill("강력한 펀치", 1.8, 0.0, 0),
-                new Skill("스타 플래티넘 러쉬", 4.3, 0.0, 0)
+                new Skill("번개같은 이동", 1.1, 0.0, 0,20),
+                new Skill("강력한 펀치", 1.8, 0.0, 35),
+                new Skill("스타 플래티넘 러쉬", 4.3, 0.0, 100)
             })
         },
         {
             "오정훈",
             new TeammateData(190, 120, 120, 10.0, new List<Skill>
             {
-                new Skill("화염구", 0.9, 0.0, 0),
-                new Skill("불꽃의 일격", 2.3, 0.0, 0),
-                new Skill("지옥의 불꽃", 4.9, 0.0, 0)
+                new Skill("화염구", 0.9, 0.0, 15),
+                new Skill("불꽃의 일격", 2.3, 0.0, 30),
+                new Skill("지옥의 불꽃", 4.9, 0.0, 100)
             })
         },
         {
             "조정훈",
             new TeammateData(270, 90, 90, 10.0, new List<Skill>
             {
-                new Skill("대지의 결의", 0, 20.0, 0),
-                new Skill("강인한 의지", 0, 0.0, 0),
-                new Skill("대지의 분노", 2.8, 0.0, 0)
+                new Skill("대지의 결의", 0, 20.0, 10),
+                new Skill("강인한 의지", 0, 0.0, 25),
+                new Skill("대지의 분노", 2.8, 0.0, 100)
             })
         },
         {
             "유재민",
             new TeammateData(200, 80, 180, 10.0, new List<Skill>
             {
-                new Skill("전기 충격", 1.2, 0.0, 0),
-                new Skill("전기 강화", 0, 0.0, 0),
-                new Skill("천둥의 심판", 3.5, 0.0, 0)
+                new Skill("전기 충격", 1.2, 0.0, 15),
+                new Skill("전기 강화", 0, 0.0, 20),
+                new Skill("천둥의 심판", 3.5, 0.0, 100)
             })
         },
         {
             "최동욱 & 나비",
             new TeammateData(180, 80, 120, 10.0, new List<Skill>
             {
-                new Skill("치유의 바람", 0, 0.0, 0),
-                new Skill("바람의 쇄도", 1, 0.0, 0),
-                new Skill("회복의 신풍", 0, 0.0, 0)
+                new Skill("치유의 바람", 0, 0.0, 20),
+                new Skill("바람의 쇄도", 1, 0.0, 40),
+                new Skill("회복의 신풍", 0, 0.0, 100)
             })
         }
     };
@@ -95,6 +96,7 @@ public class Teammate : MonoBehaviour
             defensePercentTeammate = data.DefensePercent;
             skills = new List<Skill>(data.Skills);
             skillsInitialized = true;
+            stun = false;
         }
         else
         {
