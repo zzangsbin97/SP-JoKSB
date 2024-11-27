@@ -4,6 +4,7 @@ using UnityEngine;
 public class Teammate : MonoBehaviour
 {
     public int maxHP;
+    public int currentHP;
     public int speed;
     public int standGauge = 50;
     public double attackPercent;
@@ -45,7 +46,7 @@ public class Teammate : MonoBehaviour
             {
                 new Skill("»≠ø∞±∏", 0.9, 0.0, 0),
                 new Skill("∫“≤…¿« ¿œ∞›", 2.3, 0.0, 0),
-                new Skill("¡ˆø¡¿« ∫“≤…", 49, 0.0, 0)
+                new Skill("¡ˆø¡¿« ∫“≤…", 4.9, 0.0, 0)
             })
         },
         {
@@ -88,6 +89,7 @@ public class Teammate : MonoBehaviour
         {
             teammateName = name;
             maxHP = data.MaxHP;
+            currentHP = maxHP;
             attackPercent = data.AttackPercent;
             speed = data.Speed;
             defensePercentTeammate = data.DefensePercent;
@@ -103,6 +105,7 @@ public class Teammate : MonoBehaviour
     private class TeammateData
     {
         public int MaxHP { get; }
+        public int CurrentHP { get; }
         public double AttackPercent { get; }
         public int Speed { get; }
         public double DefensePercent { get; }
