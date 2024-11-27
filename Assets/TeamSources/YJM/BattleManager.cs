@@ -87,7 +87,7 @@ public class BattleManager : MonoBehaviour
             teammate.standGauge -= 20;
             double Damage = RandomDamage(110, 140, 100);
             battleMonster.currentHP -= Mathf.RoundToInt((float)Damage);
-
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
@@ -99,6 +99,7 @@ public class BattleManager : MonoBehaviour
             double Damage = RandomDamage(180, 220, 100);
             battleMonster.currentHP -= Mathf.RoundToInt((float)Damage);
             //스턴 구현 필요 
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
@@ -108,7 +109,7 @@ public class BattleManager : MonoBehaviour
             teammate.standGauge -= 100;
             double Damage = RandomDamage(430, 470, 100);
             battleMonster.currentHP -= Mathf.RoundToInt((float)Damage);
-            
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
@@ -118,7 +119,7 @@ public class BattleManager : MonoBehaviour
             teammate.standGauge -= 15;
             double Damage = RandomDamage(90, 120, 120);
             battleMonster.currentHP -= Mathf.RoundToInt((float)Damage);
-
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
@@ -128,7 +129,7 @@ public class BattleManager : MonoBehaviour
             teammate.standGauge -= 30;
             double Damage = RandomDamage(230, 250, 120);
             battleMonster.currentHP -= Mathf.RoundToInt((float)Damage);
-
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
@@ -138,7 +139,7 @@ public class BattleManager : MonoBehaviour
             teammate.standGauge -= 100;
             double Damage = RandomDamage(490, 510, 120);
             battleMonster.currentHP -= Mathf.RoundToInt((float)Damage);
-
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
@@ -149,6 +150,7 @@ public class BattleManager : MonoBehaviour
             teammate.defensePercentTeammate += 20;
             //도발 구현 필요
             //턴 관리 코드 필요
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
         }
         if (skill.skillName == "강인한 의지")
@@ -158,8 +160,10 @@ public class BattleManager : MonoBehaviour
             teammate.currentHP += Mathf.RoundToInt((float)health);
             teammate.defensePercentTeammate += 20;
             //턴 관리 코드 필요
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"{teammate.teammateName}이(가) {health}만큼 회복했습니다!");
+            Debug.Log($"{teammate.teammateName}이(가) {teammate.defensePercentTeammate}의 방어력을 가집니다.");
         }
         if (skill.skillName == "대지의 분노")
         {
@@ -167,6 +171,7 @@ public class BattleManager : MonoBehaviour
             double Damage = RandomDamage(280, 310, 90);
             battleMonster.currentHP -= Mathf.RoundToInt((float)Damage);
             //기절 코드 구현 필요
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
@@ -177,6 +182,7 @@ public class BattleManager : MonoBehaviour
             double Damage = RandomDamage(120, 120, 80);
             battleMonster.currentHP -= Mathf.RoundToInt((float)Damage);
             //기절 코드 구현 필요
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
@@ -197,7 +203,7 @@ public class BattleManager : MonoBehaviour
             teammate.standGauge -= 100;
             double Damage = RandomDamage(350, 400, 80);
             battleMonster.currentHP -= Mathf.RoundToInt((float)Damage);
-
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
@@ -209,6 +215,7 @@ public class BattleManager : MonoBehaviour
             {
                 battleteammate.currentHP += 40;
             }
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
 
         }
@@ -220,6 +227,7 @@ public class BattleManager : MonoBehaviour
             battleMonster.currentHP -= Mathf.RoundToInt((float)Damage);
             double decrease = battleMonster.attackPower * 0.2;
             battleMonster.attackPower -= Mathf.RoundToInt((float)decrease);
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
@@ -234,7 +242,7 @@ public class BattleManager : MonoBehaviour
                 teammate.currentHP += Mathf.RoundToInt((float)health);
                 teammate.defensePercentTeammate += 15;
             }
-
+            Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
 
         }
