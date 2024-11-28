@@ -1527,6 +1527,9 @@ MonoBehaviour:
   IsTalking: 0
   talkText: {fileID: 1218594074}
   talkingTeammate: {fileID: 0}
+  dialogueText: {fileID: 0}
+  teammateId: 0
+  textIndex: 0
 --- !u!4 &1367517778
 Transform:
   m_ObjectHideFlags: 0
@@ -1841,7 +1844,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e277da3cbeb553942952a94dec07e34e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   playerHP: 0
   playerStandGauge: 0
   deffensePercent: 0
@@ -1872,6 +1874,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   teammateDialogueManager: {fileID: 1367517777}
+  scanObject: {fileID: 0}
 --- !u!114 &1512151067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140515,7 +140518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2765045054625628466, guid: c912c8815c7cef74ab7b1db8a0a44258, type: 3}
       propertyPath: m_Name
-      value: Teammate2
+      value: "\uC720\uC7AC\uBBFC"
       objectReference: {fileID: 0}
     - target: {fileID: 7560650286288897396, guid: c912c8815c7cef74ab7b1db8a0a44258, type: 3}
       propertyPath: m_LocalPosition.x
@@ -140560,8 +140563,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2765045054625628466, guid: c912c8815c7cef74ab7b1db8a0a44258, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2400756612555962209}
   m_SourcePrefab: {fileID: 100100000, guid: c912c8815c7cef74ab7b1db8a0a44258, type: 3}
+--- !u!1 &2400756612555962208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2765045054625628466, guid: c912c8815c7cef74ab7b1db8a0a44258, type: 3}
+  m_PrefabInstance: {fileID: 2400756612555962207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2400756612555962209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400756612555962208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a054c38125e94545b0afb295408dd21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectId: 2
 --- !u!1001 &8280612114002179115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140576,7 +140600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 94766415022174851, guid: 5f54f9b77413a1d459036057b914a428, type: 3}
       propertyPath: m_Name
-      value: Teammate1
+      value: "\uC624\uC815\uD6C8"
       objectReference: {fileID: 0}
     - target: {fileID: 4219999716904824707, guid: 5f54f9b77413a1d459036057b914a428, type: 3}
       propertyPath: id
@@ -140625,8 +140649,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 94766415022174851, guid: 5f54f9b77413a1d459036057b914a428, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8280612114002179117}
   m_SourcePrefab: {fileID: 100100000, guid: 5f54f9b77413a1d459036057b914a428, type: 3}
+--- !u!1 &8280612114002179116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 94766415022174851, guid: 5f54f9b77413a1d459036057b914a428, type: 3}
+  m_PrefabInstance: {fileID: 8280612114002179115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8280612114002179117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280612114002179116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a054c38125e94545b0afb295408dd21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectId: 1
 --- !u!1001 &8391892182231869357
 PrefabInstance:
   m_ObjectHideFlags: 0
