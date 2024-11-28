@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Teammate : MonoBehaviour
 {
+    public int id;
     public int maxHP;
     public int speed;
     public int standGauge = 50;

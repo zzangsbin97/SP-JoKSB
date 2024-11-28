@@ -23,13 +23,13 @@ public class TeammateDialogueManager : MonoBehaviour {
 			return;
 		} */
 
-		if (IsTalking) {
-			IsTalking = false;
-		} else {
+		// if (IsTalking) {
+		//	IsTalking = false;
+		// } else {
 			IsTalking = true;
 			this.talkingTeammate = talkingTeammate;
 			talkText.text = "말하는 동료의 이름은 " + teammateName;
-		}
+		// }
 
 		dialoguePanel.SetActive(IsTalking);
 		

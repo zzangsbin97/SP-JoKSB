@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour {
+	public int id;
 	public int playerHP;
 	public int playerStandGauge;
 	public double deffensePercent;
