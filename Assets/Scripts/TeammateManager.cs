@@ -24,9 +24,19 @@ public class TeammateManager : MonoBehaviour
         Teammate.InitializeTeammate("오정훈");
         AddTeammate(Teammate);
 
+        teammateObject = new GameObject("조정훈");
+        Teammate = teammateObject.AddComponent<Teammate>();
+        Teammate.InitializeTeammate("조정훈");
+        AddTeammate(Teammate);
+
         teammateObject = new GameObject("유재민");
         Teammate = teammateObject.AddComponent<Teammate>();
         Teammate.InitializeTeammate("유재민");
+        AddTeammate(Teammate);
+
+        teammateObject = new GameObject("최동욱 & 나비");
+        Teammate = teammateObject.AddComponent<Teammate>();
+        Teammate.InitializeTeammate("최동욱 & 나비");
         AddTeammate(Teammate);
     }
 
