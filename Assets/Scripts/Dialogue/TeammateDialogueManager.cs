@@ -10,6 +10,10 @@ public class TeammateDialogueManager : MonoBehaviour {
 	public bool IsTalking;
 	public TMP_Text talkText; // Inspector에서 할당
 	public GameObject talkingTeammate;
+	public DialogueText dialogueText;
+
+	public int teammateId;
+	public int textIndex;
 
 	public void Talk(GameObject talkingTeammate, string teammateName) {
 		/*
@@ -28,11 +32,16 @@ public class TeammateDialogueManager : MonoBehaviour {
 		// } else {
 			IsTalking = true;
 			this.talkingTeammate = talkingTeammate;
+			// teammateId = talkingTeammate.id;
 			talkText.text = "말하는 동료의 이름은 " + teammateName;
 		// }
 
 		dialoguePanel.SetActive(IsTalking);
 		
+	}
+
+	public void getDialogueText() {
+		dialogueText.GetText(teammateId, textIndex);
 	}
 
 	

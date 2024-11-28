@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueTextManager : MonoBehaviour
+public class DialogueText : MonoBehaviour
 {
 
     // 블레오(오정훈) Id 1, 농담곰(유재민) Id 2
@@ -25,6 +25,11 @@ public class DialogueTextManager : MonoBehaviour
 		
 		// 유재민(Id 2)
 		talkText.Add(2, new string[] { "난 유재민, 전기의 맥박! 이 리듬 속에서 누구도 날 막지 못해! 에너지를 퍼뜨리고 사기를 복돋아주지!", "Yo, 싸움은 내가 즐기는 무대! 네가 내 곁에 서면 전율이 흐르지. 내 비트와 전기로 널 강화할 테니 준비해!", "아~ Yeah~ 내가 널 이끌게! 공격력과 스피드 모두 Boom Up! 우리 팀의 스테이지는 누구도 못 끊 어!"});
+	}
+
+	public string GetText(int id, int TextIndex) {
+
+		return talkText[id][TextIndex];
 	}
 
 

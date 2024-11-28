@@ -16,6 +16,8 @@ public class Player : MonoBehaviour {
 	private TeammateManager teammateManager;
 	public TeammateDialogueManager teammateDialogueManager;
 
+	public GameObject scanObject;
+
 
 	void Start() {
 
@@ -39,14 +41,20 @@ public class Player : MonoBehaviour {
 
 		foreach (var hit in hits) {
 			if (hit.collider != null) {
+
 				this.isExist = true;
+
+				scanObject = hit.collider.gameObject;
+				
 				Teammate teammate = hit.collider.gameObject.GetComponent<Teammate>();
+
 				if (teammate != null && !teammate.IsInMyTeam) // Teammate인지 확인하고 팀에 추가되지 않은 경우
 				{
 					Debug.Log(teammate.teammateName + "을(를) 찾았습니다!");
 					teammate.IsInMyTeam = true; // 팀에 추가 표시
 					//teammateManager.AddTeammate(teammate); // TeammateManager에 추가
 					teammateDialogueManager.Talk(hit.collider.gameObject, teammate.teammateName);
+					
 					hit.collider.gameObject.SetActive(false); // 상호작용한 "Teammate" 객체 비활성화
 				}
 			}
