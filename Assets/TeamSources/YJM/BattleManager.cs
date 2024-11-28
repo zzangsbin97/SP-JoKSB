@@ -25,10 +25,11 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
+		Screen.SetResolution(1080, 1920, true);
+		Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true); // 화면 비율 고정
 
-
-        // TeammateManager가 연결되지 않았다면 FindObjectOfType로 찾음
-        if (teammateManager == null)
+		// TeammateManager가 연결되지 않았다면 FindObjectOfType로 찾음
+		if (teammateManager == null)
         {
             teammateManager = FindObjectOfType<TeammateManager>();
         }

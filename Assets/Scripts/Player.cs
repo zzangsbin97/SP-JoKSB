@@ -16,7 +16,12 @@ public class Player : MonoBehaviour {
 	private TeammateManager teammateManager;
 	public TeammateDialogueManager teammateDialogueManager;
 
+
 	void Start() {
+
+		Screen.SetResolution(1080, 1920, true);
+		Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true); // 화면 비율 고정
+
 		rigidbody2d = GetComponent<Rigidbody2D>();
 		interAction.Enable();
 		interAction.performed += FindTeammate;
