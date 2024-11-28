@@ -5,12 +5,10 @@ using TMPro;
 
 public class ButtonManager : MonoBehaviour
 {
-    public List<Button> buttons; // TeammatePanel 버튼 리스트
+    public List<Button> buttons; // 동료 버튼 리스트 (미리 생성된 버튼 연결)
     private BattleManager battleManager;
 
-    public List<Teammate> teammates = new List<Teammate>();
-
-    [SerializeField] private SkillButtonManager skillButtonManager; // SkillButtonManager 참조
+    [SerializeField] private SkillButtonManager skillButtonManager;
 
     private void Start()
     {
@@ -23,42 +21,39 @@ public class ButtonManager : MonoBehaviour
             return;
         }
 
-
         // SkillButtonManager 자동 검색
         if (skillButtonManager == null)
         {
             skillButtonManager = FindObjectOfType<SkillButtonManager>();
             if (skillButtonManager == null)
             {
-                Debug.LogError("SkillButtonManager를 찾을 수 없습니다! Unity 에디터에서 수동으로 연결하거나 스크립트를 확인하세요.");
+                Debug.LogError("SkillButtonManager를 찾을 수 없습니다!");
                 return;
             }
         }
 
-        UpdateButtons(); // 동료 데이터를 기반으로 버튼 업데이트
+        UpdateButtons(); // 버튼 초기화
     }
 
     public void UpdateButtons()
     {
-        // BattleManager에서 동료 데이터를 가져옴
-        List<Teammate> teammates = new List<Teammate>(battleManager.battleTeammates);
-        Debug.Log($"이름: {teammates[0].teammateName}, 체력: {teammates[0].maxHP}, 공격력: {teammates[0].attackPercent}, 스킬: {teammates[0].skills}");
+        List<Teammate> teammates = battleManager.battleTeammates;
+
         if (teammates == null || teammates.Count == 0)
         {
             Debug.LogWarning("BattleManager에 동료 데이터가 없습니다.");
-            foreach (var button in buttons)
-            {
-                button.gameObject.SetActive(false); // 버튼 비활성화
-            }
+            DisableAllButtons();
             return;
         }
+
+        Debug.Log($"ButtonManager: 총 {teammates.Count}명의 동료 데이터를 수신.");
 
         int buttonIndex = 0;
         foreach (var teammate in teammates)
         {
-            if (buttonIndex >= buttons.Count)
+            if (buttonIndex > buttons.Count)
             {
-                Debug.LogWarning("TeammatePanel 버튼이 부족합니다.");
+                Debug.LogWarning("ButtonManager: 등록된 버튼이 부족합니다.");
                 break;
             }
 
@@ -74,16 +69,11 @@ public class ButtonManager : MonoBehaviour
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => OnTeammateButtonClicked(teammate)); // 클릭 이벤트 설정
 
+            Debug.Log($"ButtonManager: {teammate.teammateName} 버튼 활성화 완료.");
             buttonIndex++;
         }
 
-        // 남은 버튼 비활성화
-        for (int i = buttonIndex; i < buttons.Count; i++)
-        {
-            buttons[i].gameObject.SetActive(false);
-        }
-
-        Canvas.ForceUpdateCanvases(); // UI 갱신
+        DisableExtraButtons(buttonIndex);
     }
 
     private void OnTeammateButtonClicked(Teammate teammate)
@@ -92,12 +82,27 @@ public class ButtonManager : MonoBehaviour
 
         if (skillButtonManager != null)
         {
-            Debug.Log("SkillButtonManager가 정상적으로 연결되었습니다.");
-            skillButtonManager.ActivateSkillButtons(teammate); // 동료 정보 전달
+            skillButtonManager.ActivateSkillButtons(teammate); // 스킬 버튼 활성화
         }
         else
         {
             Debug.LogError("SkillButtonManager가 연결되지 않았습니다!");
+        }
+    }
+
+    private void DisableAllButtons()
+    {
+        foreach (var button in buttons)
+        {
+            button.gameObject.SetActive(false);
+        }
+    }
+
+    private void DisableExtraButtons(int activeCount)
+    {
+        for (int i = activeCount; i < buttons.Count; i++)
+        {
+            buttons[i].gameObject.SetActive(false);
         }
     }
 }
