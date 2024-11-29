@@ -357,6 +357,11 @@ public class BattleManager : MonoBehaviour
 
     }
 
+    public int GetExpectedActionsCount()
+    {
+        return battleTeammates.Count; // 예: 팀원 수 + 몬스터 1개
+    }
+
     void Update()
     {
         
