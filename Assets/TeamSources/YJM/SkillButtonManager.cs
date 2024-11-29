@@ -82,33 +82,44 @@ public class SkillButtonManager : MonoBehaviour
     public void OnSkillButtonClicked(Teammate Teammate, Skill skill)
     {
         Debug.Log($"OnSkillButtonClicked호출: 이름 = {Teammate.teammateName}, 체력 = {Teammate.maxHP}, 스킬 개수 = {Teammate.skills?.Count ?? 0}");
-        if (!Teammate.stun)
+        if (!Teammate.usedSkill)
         {
-            Debug.Log($"스킬 '{skill.skillName}' 버튼 클릭됨");
-            Debug.Log($"스킬의 정보 : 이름 : {skill.skillName}, 공격력 : {skill.attackDamage}, 방어력 증가 : {skill.defensePercent}, 버프 : {skill.buffConst} ");
-            /*if (Teammate == null)
+            if (!Teammate.stun)
             {
-                Debug.LogError("SkillButtonManager에서 전달된 teammate이 null입니다!");
-            }*/
+                Debug.Log($"스킬 '{skill.skillName}' 버튼 클릭됨");
+                Debug.Log($"스킬의 정보 : 이름 : {skill.skillName}, 공격력 : {skill.attackDamage}, 방어력 증가 : {skill.defensePercent}, 버프 : {skill.buffConst} ");
+                /*if (Teammate == null)
+                {
+                    Debug.LogError("SkillButtonManager에서 전달된 teammate이 null입니다!");
+                }*/
 
-            if (skill == null)
-            {
-                Debug.LogError("SkillButtonManager에서 전달된 skill이 null입니다!");
-            }
+                if (skill == null)
+                {
+                    Debug.LogError("SkillButtonManager에서 전달된 skill이 null입니다!");
+                }
 
-            if (Teammate.standGauge - skill.usingStandGauge >= 0)
-            {
-                BattleManager.Instance.ApplySkillDamage(Teammate, skill);
+                if (Teammate.standGauge - skill.usingStandGauge >= 0)
+                {
+                    Teammate.usedSkill = true;
+                    BattleManager.Instance.ApplySkillDamage(Teammate, skill);
+                    DisableAllButtons();
+                }
+                else
+                {
+                    Debug.Log($"{Teammate.teammateName}의 스탠드 게이지가 부족합니다!!");
+                }
             }
             else
             {
-                Debug.Log($"{Teammate.teammateName}의 스탠드 게이지가 부족합니다!!");
+                Debug.Log($"{Teammate.teammateName}가 기절상태입니다!");
             }
         }
         else
         {
-            Debug.Log($"{Teammate.teammateName}가 기절상태입니다!");
+            Debug.Log($"{Teammate.teammateName}는 이미 스킬을 사용했습니다.");
         }
-        // 스킬 사용 로직 구현
+        
+
+
     }
 }

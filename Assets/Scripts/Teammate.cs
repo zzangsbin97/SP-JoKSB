@@ -15,6 +15,7 @@ public class Teammate : MonoBehaviour
     public bool skillsInitialized = false;
     public bool IsInMyTeam = false;
     public bool stun = false; //기절 유무
+    public bool usedSkill = false; //스킬 사용 유무
 
 
 
@@ -98,7 +99,8 @@ public class Teammate : MonoBehaviour
             skills = new List<Skill>(data.Skills);
             skillsInitialized = true;
             stun = false;
-        }
+            bool usedSkill = false;
+}
         else
         {
             Debug.LogError($"Teammate data for {name} not found!");
