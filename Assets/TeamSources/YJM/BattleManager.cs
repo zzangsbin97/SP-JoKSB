@@ -276,6 +276,7 @@ public class BattleManager : MonoBehaviour
 
         }
 
+        
 
         // 스킬 데미지 계산
         /*double damage = (skill.attackDamage * teammate.attackPercent);
@@ -288,6 +289,105 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log($"{battleMonster.MonsterName}이 죽었습니다.");
         }*/
+    }
+
+    public void MonsterSkillUse(Monster monster,Skill skill)
+    {
+        if(skill.skillName == "강렬하게 휘두르기")
+        {
+            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
+            monster.standGauge -= skill.usingStandGauge;
+            double Damage = RandomDamage(100, 120, 40);
+            System.Random rand = new System.Random();
+            int randTeammate = rand.Next(0, battleTeammates.Count - 1);
+            battleTeammates[randTeammate].currentHP -= Mathf.RoundToInt((float)Damage);
+            Debug.Log($"{battleTeammates[randTeammate].teammateName}의 현재 체력은 {battleTeammates[randTeammate].currentHP}입니다.");
+        }
+
+        if (skill.skillName == "공포의 외침")
+        {
+            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
+            monster.standGauge -= skill.usingStandGauge;
+
+            foreach (Teammate battleteammate in battleTeammates)
+            {
+                double decrease = battleteammate.attackPercent*0.3;
+                battleteammate.attackPercent -= Mathf.RoundToInt((float)decrease);
+                Debug.Log($"{battleteammate.teammateName}의 공격력이 {battleteammate.attackPercent}입니다.");
+            }
+        }
+        if(skill.skillName == "방해의 광선")
+        {
+            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
+            monster.standGauge -= skill.usingStandGauge;
+
+            double Damage = RandomDamage(80, 80, 100);
+            System.Random rand = new System.Random();
+            int randTeammate = rand.Next(0, battleTeammates.Count - 1);
+            battleTeammates[randTeammate].currentHP -= Mathf.RoundToInt((float)Damage);
+            battleTeammates[randTeammate].defensePercentTeammate -= 5;
+            Debug.Log($"{battleTeammates[randTeammate].teammateName}의 현재 체력은 {battleTeammates[randTeammate].currentHP}입니다.");
+        }
+        if (skill.skillName == "고속 돌진")
+        {
+            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
+            monster.standGauge -= skill.usingStandGauge;
+            double Damage = RandomDamage(180, 200, 100);
+            System.Random rand = new System.Random();
+            int randTeammate = rand.Next(0, battleTeammates.Count - 1);
+            battleTeammates[randTeammate].currentHP -= Mathf.RoundToInt((float)Damage);
+            Debug.Log($"{battleTeammates[randTeammate].teammateName}의 현재 체력은 {battleTeammates[randTeammate].currentHP}입니다.");
+        }
+        if (skill.skillName == "스텔스 어택")
+        {
+            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
+            monster.standGauge -= skill.usingStandGauge;
+            double Damage = RandomDamage(120, 150, 100);
+            System.Random rand = new System.Random();
+            foreach (Teammate battleteammate in battleTeammates)
+            {
+                battleteammate.currentHP -= Mathf.RoundToInt((float)Damage);
+                Debug.Log($"{battleteammate.teammateName}의 현재 체력은 {battleteammate.currentHP}입니다.");
+            }
+        }
+
+        if (skill.skillName == "충격파")
+        {
+            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
+            monster.standGauge -= skill.usingStandGauge;
+            double Damage = RandomDamage(150, 150, 80);
+            System.Random rand = new System.Random();
+            int randTeammate = rand.Next(0, battleTeammates.Count - 1);
+            battleTeammates[randTeammate].currentHP -= Mathf.RoundToInt((float)Damage);
+            Debug.Log($"{battleTeammates[randTeammate].teammateName}의 현재 체력은 {battleTeammates[randTeammate].currentHP}입니다.");
+        }
+
+        if(skill.skillName == "광역 방해")
+        {
+            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
+            monster.standGauge -= skill.usingStandGauge;
+            foreach (Teammate battleteammate in battleTeammates)
+            {
+                double decrease = battleteammate.attackPercent*0.2;
+                battleteammate.attackPercent -= Mathf.RoundToInt((float)decrease);
+                battleteammate.standGauge -= 10;
+                Debug.Log($"{battleteammate.teammateName}의 공격력이 {battleteammate.attackPercent}입니다.");
+                Debug.Log($"{battleteammate.teammateName}의 스탠드게이지가 {battleteammate.standGauge}입니다.");
+            }
+        }
+        if (skill.skillName == "대폭발")
+        {
+            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
+            monster.standGauge -= skill.usingStandGauge;
+            double Damage = RandomDamage(170, 200, 80);
+            System.Random rand = new System.Random();
+            foreach (Teammate battleteammate in battleTeammates)
+            {
+                battleteammate.currentHP -= Mathf.RoundToInt((float)Damage);
+                Debug.Log($"{battleteammate.teammateName}의 현재 체력은 {battleteammate.currentHP}입니다.");
+            }
+        }
+
     }
 
 
