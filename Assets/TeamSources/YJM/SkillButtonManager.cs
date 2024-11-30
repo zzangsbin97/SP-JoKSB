@@ -8,6 +8,7 @@ public class SkillButtonManager : MonoBehaviour
     public List<Button> skillButtons = new List<Button>(); // 이미 생성된 버튼 리스트
     public BattleManager battleManager;
     public Teammate ActiveTeammate;
+    public Monster monster;
     public Skill skill;
     private PriorityQueue actionQueue = new PriorityQueue(); // 우선순위 큐
 
@@ -183,9 +184,19 @@ public class SkillButtonManager : MonoBehaviour
             Debug.Log($"{action.teammate.teammateName}이(가) {action.skill.skillName}을(를) 실행합니다.");
             battleManager.ApplySkillDamage(action.teammate, action.skill);
 
+            if( actionQueue.Count > 1 )
+            {
+                monster = battleManager.battleMonster;
+                System.Random rand = new System.Random();
+                int randSkill = rand.Next(0, monster.skills.Count);
+
+                battleManager.MonsterSkillUse(monster, monster.skills[randSkill]);
+            }
             // 행동 간 딜레이 추가
             yield return new WaitForSeconds(1.0f);
         }
+        
+
     }
     
 }
