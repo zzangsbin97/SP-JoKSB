@@ -21,9 +21,9 @@ public class Boss : MonoBehaviour
             "김규석",
             new BossData(1800, 150, 130, 10.0, new List<Skill>
             {
-                new Skill("얼음 창", 80, 0.0, 0),
-                new Skill("혹한의 바람", 60, 0.0, 0),
-                new Skill("절대 영도", 120, 0.0, 0)
+                new Skill("얼음 창", 80, 0.0, 0,40),
+                new Skill("혹한의 바람", 60, 0.0, 0,60),
+                new Skill("절대 영도", 120, 0.0, 0,100)
             })
         }
     };
