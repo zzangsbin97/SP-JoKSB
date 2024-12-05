@@ -108,7 +108,9 @@ public class SkillButtonManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log($"{Teammate.teammateName}의 스탠드 게이지가 부족합니다!!");
+                    Debug.LogWarning($"{Teammate.teammateName}의 스탠드 게이지가 부족합니다!");
+                    actionQueue.Enqueue(null); // NULL 액션 추가
+                    CheckAndExecuteQueue();
                 }
             }
             else
@@ -195,7 +197,7 @@ public class SkillButtonManager : MonoBehaviour
             // 행동 간 딜레이 추가
             yield return new WaitForSeconds(1.0f);
         }
-        
+        battleManager.EndTurn();
 
     }
     

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BattleManager : MonoBehaviour
     public MonsterManager monsterManager; // Unity Editor에서 연결 가능
     public List<Teammate> battleTeammates = new List<Teammate>();
     public Monster battleMonster; // 배틀에 등장하는 몬스터
+    public int turn;
 
     void Awake()
     {
@@ -25,11 +27,11 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
-		Screen.SetResolution(1080, 1920, true);
-		Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true); // 화면 비율 고정
+        Screen.SetResolution(1080, 1920, true);
+        Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true); // 화면 비율 고정
 
-		// TeammateManager가 연결되지 않았다면 FindObjectOfType로 찾음
-		if (teammateManager == null)
+        // TeammateManager가 연결되지 않았다면 FindObjectOfType로 찾음
+        if (teammateManager == null)
         {
             teammateManager = FindObjectOfType<TeammateManager>();
         }
@@ -55,11 +57,11 @@ public class BattleManager : MonoBehaviour
         InitializeBattleMonster();
         PrintBattleTeammates();
 
-
+        turn = 1;
     }
 
 
-    public void ApplySkillDamage(Teammate teammate, Skill skill) //스킬 사용
+    public void ApplySkillDamage(Teammate teammate, Skill skill)
     {
         if (battleMonster == null)
         {
@@ -83,7 +85,7 @@ public class BattleManager : MonoBehaviour
             Debug.LogError("Skill이 null입니다!");
             return;
         }
-        if(skill.skillName == "번개같은 이동")
+        if (skill.skillName == "번개같은 이동")
         {
             teammate.standGauge -= skill.usingStandGauge;
             double Damage = RandomDamage(110, 140, 100);
@@ -93,8 +95,14 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
 
+            if (battleMonster.currentHP <= 0) {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
+
         }
-        if(skill.skillName == "강력한 펀치")
+        if (skill.skillName == "강력한 펀치")
         {
             teammate.standGauge -= skill.usingStandGauge;
             double Damage = RandomDamage(180, 220, 100);
@@ -110,8 +118,14 @@ public class BattleManager : MonoBehaviour
             }
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
+            if (battleMonster.currentHP <= 0)
+            {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
         }
-        if(skill.skillName == "스타 플래티넘 러쉬")
+        if (skill.skillName == "스타 플래티넘 러쉬")
         {
             teammate.standGauge -= skill.usingStandGauge;
             double Damage = RandomDamage(430, 470, 100);
@@ -120,8 +134,14 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
+            if (battleMonster.currentHP <= 0)
+            {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
         }
-        if(skill.skillName == "화염구")
+        if (skill.skillName == "화염구")
         {
             teammate.standGauge -= skill.usingStandGauge;
             double Damage = RandomDamage(90, 120, 120);
@@ -130,6 +150,12 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
+            if (battleMonster.currentHP <= 0)
+            {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
         }
         if (skill.skillName == "불꽃의 일격")
         {
@@ -140,6 +166,12 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
+            if (battleMonster.currentHP <= 0)
+            {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
         }
         if (skill.skillName == "지옥의 불꽃")
         {
@@ -150,6 +182,12 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
+            if (battleMonster.currentHP <= 0)
+            {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
         }
         if (skill.skillName == "대지의 결의")
         {
@@ -160,6 +198,12 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"{teammate.teammateName}의 현재 스탠드게이지는 {teammate.standGauge}입니다.");
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"{teammate.teammateName}이(가) {teammate.defensePercentTeammate}의 방어력을 가집니다.");
+            if (battleMonster.currentHP <= 0)
+            {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
         }
         if (skill.skillName == "강인한 의지")
         {
@@ -172,6 +216,12 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"{teammate.teammateName}이(가) {health}만큼 회복했습니다!");
             Debug.Log($"{teammate.teammateName}이(가) {teammate.defensePercentTeammate}의 방어력을 가집니다.");
+            if (battleMonster.currentHP <= 0)
+            {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
         }
         if (skill.skillName == "대지의 분노")
         {
@@ -189,6 +239,12 @@ public class BattleManager : MonoBehaviour
             }
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
+            if (battleMonster.currentHP <= 0)
+            {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
         }
         if (skill.skillName == "전기 충격")
         {
@@ -207,6 +263,12 @@ public class BattleManager : MonoBehaviour
             }
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
+            if (battleMonster.currentHP <= 0)
+            {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
         }
         if (skill.skillName == "전기 강화")
         {
@@ -230,6 +292,12 @@ public class BattleManager : MonoBehaviour
             Debug.Log($"{teammate.teammateName}이(가) {skill.skillName}을(를) 사용했습니다!");
             Debug.Log($"몬스터 {battleMonster.MonsterName}에게 {Damage}의 데미지를 입혔습니다!");
             Debug.Log($"몬스터 남은 체력: {battleMonster.currentHP}/{battleMonster.maxHP}");
+            if (battleMonster.currentHP <= 0)
+            {
+                Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
+                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+
+            }
         }
         if (skill.skillName == "치유의 바람")
         {
@@ -241,7 +309,7 @@ public class BattleManager : MonoBehaviour
                 battleteammate.currentHP += 40;
                 Debug.Log($"{battleteammate.teammateName}의 체력이 {battleteammate.currentHP}입니다.");
             }
-            
+
 
         }
 
@@ -276,7 +344,7 @@ public class BattleManager : MonoBehaviour
 
         }
 
-        
+
 
         // 스킬 데미지 계산
         /*double damage = (skill.attackDamage * teammate.attackPercent);
@@ -291,15 +359,15 @@ public class BattleManager : MonoBehaviour
         }*/
     }
 
-    public void MonsterSkillUse(Monster monster,Skill skill)
+    public void MonsterSkillUse(Monster monster, Skill skill)
     {
-        if(skill.skillName == "강렬하게 휘두르기")
+        if (skill.skillName == "강렬하게 휘두르기")
         {
             Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
             monster.standGauge -= skill.usingStandGauge;
             double Damage = RandomDamage(100, 120, 40);
             System.Random rand = new System.Random();
-            int randTeammate = rand.Next(0, battleTeammates.Count);
+            int randTeammate = rand.Next(0, battleTeammates.Count - 1);
             battleTeammates[randTeammate].currentHP -= Mathf.RoundToInt((float)Damage);
             Debug.Log($"{battleTeammates[randTeammate].teammateName}의 현재 체력은 {battleTeammates[randTeammate].currentHP}입니다.");
         }
@@ -311,19 +379,19 @@ public class BattleManager : MonoBehaviour
 
             foreach (Teammate battleteammate in battleTeammates)
             {
-                double decrease = battleteammate.attackPercent*0.3;
+                double decrease = battleteammate.attackPercent * 0.3;
                 battleteammate.attackPercent -= Mathf.RoundToInt((float)decrease);
                 Debug.Log($"{battleteammate.teammateName}의 공격력이 {battleteammate.attackPercent}입니다.");
             }
         }
-        if(skill.skillName == "방해의 광선")
+        if (skill.skillName == "방해의 광선")
         {
             Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
             monster.standGauge -= skill.usingStandGauge;
 
             double Damage = RandomDamage(80, 80, 100);
             System.Random rand = new System.Random();
-            int randTeammate = rand.Next(0, battleTeammates.Count);
+            int randTeammate = rand.Next(0, battleTeammates.Count - 1);
             battleTeammates[randTeammate].currentHP -= Mathf.RoundToInt((float)Damage);
             battleTeammates[randTeammate].defensePercentTeammate -= 5;
             Debug.Log($"{battleTeammates[randTeammate].teammateName}의 현재 체력은 {battleTeammates[randTeammate].currentHP}입니다.");
@@ -334,7 +402,7 @@ public class BattleManager : MonoBehaviour
             monster.standGauge -= skill.usingStandGauge;
             double Damage = RandomDamage(180, 200, 100);
             System.Random rand = new System.Random();
-            int randTeammate = rand.Next(0, battleTeammates.Count);
+            int randTeammate = rand.Next(0, battleTeammates.Count - 1);
             battleTeammates[randTeammate].currentHP -= Mathf.RoundToInt((float)Damage);
             Debug.Log($"{battleTeammates[randTeammate].teammateName}의 현재 체력은 {battleTeammates[randTeammate].currentHP}입니다.");
         }
@@ -357,18 +425,18 @@ public class BattleManager : MonoBehaviour
             monster.standGauge -= skill.usingStandGauge;
             double Damage = RandomDamage(150, 150, 80);
             System.Random rand = new System.Random();
-            int randTeammate = rand.Next(0, battleTeammates.Count);
+            int randTeammate = rand.Next(0, battleTeammates.Count - 1);
             battleTeammates[randTeammate].currentHP -= Mathf.RoundToInt((float)Damage);
             Debug.Log($"{battleTeammates[randTeammate].teammateName}의 현재 체력은 {battleTeammates[randTeammate].currentHP}입니다.");
         }
 
-        if(skill.skillName == "광역 방해")
+        if (skill.skillName == "광역 방해")
         {
             Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
             monster.standGauge -= skill.usingStandGauge;
             foreach (Teammate battleteammate in battleTeammates)
             {
-                double decrease = battleteammate.attackPercent*0.2;
+                double decrease = battleteammate.attackPercent * 0.2;
                 battleteammate.attackPercent -= Mathf.RoundToInt((float)decrease);
                 battleteammate.standGauge -= 10;
                 Debug.Log($"{battleteammate.teammateName}의 공격력이 {battleteammate.attackPercent}입니다.");
@@ -387,44 +455,7 @@ public class BattleManager : MonoBehaviour
                 Debug.Log($"{battleteammate.teammateName}의 현재 체력은 {battleteammate.currentHP}입니다.");
             }
         }
-        if (skill.skillName == "얼음 창")
-        {
-            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
-            monster.standGauge -= skill.usingStandGauge;
-            double Damage = RandomDamage(80, 110, 150);
-            System.Random rand = new System.Random();
 
-            int randTeammate = rand.Next(0, battleTeammates.Count);
-            battleTeammates[randTeammate].currentHP -= Mathf.RoundToInt((float)Damage);
-            Debug.Log($"{battleTeammates[randTeammate].teammateName}의 현재 체력은 {battleTeammates[randTeammate].currentHP}입니다.");
-
-        }
-        if (skill.skillName == "대폭발")
-        {
-            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
-            monster.standGauge -= skill.usingStandGauge;
-            double Damage = RandomDamage(60, 90, 150);
-            System.Random rand = new System.Random();
-            foreach (Teammate battleteammate in battleTeammates)
-            {
-                double decrease = battleteammate.speed * 0.2;
-                battleteammate.speed -= Mathf.RoundToInt((float)decrease);
-                battleteammate.currentHP -= Mathf.RoundToInt((float)Damage);
-                Debug.Log($"{battleteammate.teammateName}의 현재 체력은 {battleteammate.currentHP}입니다.");
-            }
-        }
-        if (skill.skillName == "대폭발")
-        {
-            Debug.Log($"{monster.MonsterName}이 {skill.skillName}을 사용했습니다.");
-            monster.standGauge -= skill.usingStandGauge;
-            double Damage = RandomDamage(120, 140, 150);
-            System.Random rand = new System.Random();
-            foreach (Teammate battleteammate in battleTeammates)
-            {
-                battleteammate.currentHP -= Mathf.RoundToInt((float)Damage);
-                Debug.Log($"{battleteammate.teammateName}의 현재 체력은 {battleteammate.currentHP}입니다.");
-            }
-        }
     }
 
 
@@ -486,7 +517,8 @@ public class BattleManager : MonoBehaviour
 
     }
 
-    public double RandomDamage(int startPercent, int endPercent, int baseAttackPower) {
+    public double RandomDamage(int startPercent, int endPercent, int baseAttackPower)
+    {
         System.Random rand = new System.Random();
         double randPercent = rand.Next(startPercent, endPercent) / 100;
 
@@ -498,9 +530,27 @@ public class BattleManager : MonoBehaviour
     {
         return battleTeammates.Count; // 예: 팀원 수 + 몬스터 1개
     }
+    public void EndTurn()
+    {
+        turn++;
+        Debug.Log($"턴 {turn}이(가) 시작되었습니다.");
+        UpdateBattleState();
+    }
 
+    private void UpdateBattleState()
+    {
+
+        foreach (Teammate battleteammate in battleTeammates)
+        {
+            battleteammate.usedSkill = false;
+            battleteammate.standGauge += 20;
+        }
+
+        // 추가 상태 업데이트 로직 작성
+        Debug.Log("배틀 상태가 업데이트되었습니다.");
+    }
     void Update()
     {
-        
+
     }
 }
