@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1188343273486394690
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1417126715660350472, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350472, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350472, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1070648663
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350473, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350473, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350473, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350473, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350473, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350473, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350473, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350473, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350473, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350473, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417126715660350475, guid: db3033d1b9a69204ebc8a3bc98f3c254,
+        type: 3}
+      propertyPath: m_Name
+      value: PF Village Props - Weapon Rack Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 1417126714486668438, guid: db3033d1b9a69204ebc8a3bc98f3c254, type: 3}
+    - {fileID: 1417126714469770504, guid: db3033d1b9a69204ebc8a3bc98f3c254, type: 3}
+    - {fileID: 1417126714983127583, guid: db3033d1b9a69204ebc8a3bc98f3c254, type: 3}
+    - {fileID: 2203447560383477865, guid: db3033d1b9a69204ebc8a3bc98f3c254, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: db3033d1b9a69204ebc8a3bc98f3c254, type: 3}
