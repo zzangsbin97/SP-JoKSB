@@ -15,6 +15,7 @@ public class Monster : MonoBehaviour
     public List<Skill> skills = new List<Skill>();
     public bool skillsInitialized = false;
     public bool stun = false; //기절 유무
+    public bool usedSkill = false; //스킬 사용 유무
 
     private static readonly Dictionary<string, MonsterData> MonsterDataDict = new Dictionary<string, MonsterData>
     {
@@ -65,6 +66,7 @@ public class Monster : MonoBehaviour
             skills = new List<Skill>(data.Skills);
             skillsInitialized = true;
             stun = false;
+            usedSkill = false;
         }
         else
         {
