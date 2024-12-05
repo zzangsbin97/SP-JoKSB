@@ -1573,6 +1573,7 @@ MonoBehaviour:
   dialogueText: {fileID: 117216792}
   talkingTeammate: {fileID: 0}
   textIndex: 0
+  tempTeammateManager: {fileID: 0}
 --- !u!4 &1367517778
 Transform:
   m_ObjectHideFlags: 0
@@ -1701,6 +1702,8 @@ MonoBehaviour:
   MonsterName: 
   skillsInitialized: 0
   stun: 0
+  usedSkill: 0
+  monsterCategory: 0
 --- !u!114 &1439465498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2599,6 +2602,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3f3d26ae85f0046b719a58e1c08ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  speed: 0
+  standGauge: 50
+  attackPower: 0
+  currentHP: 0
+  defensePercent: 0
+  bossName: 
+  skillsInitialized: 0
+  stun: 0
 --- !u!1 &1920801249
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,15 +19,19 @@ public class TeammateManager : MonoBehaviour
         // ∆¿ ∏Ò∑œø° √ﬂ∞°
         AddTeammate(Teammate);
 
+        
         teammateObject = new GameObject("ø¿¡§»∆");
         Teammate = teammateObject.AddComponent<Teammate>();
         Teammate.InitializeTeammate("ø¿¡§»∆");
         AddTeammate(Teammate);
-
+        
+        
         teammateObject = new GameObject("¡∂¡§»∆");
         Teammate = teammateObject.AddComponent<Teammate>();
         Teammate.InitializeTeammate("¡∂¡§»∆");
         AddTeammate(Teammate);
+        
+
 
         teammateObject = new GameObject("¿Ø¿ÁπŒ");
         Teammate = teammateObject.AddComponent<Teammate>();

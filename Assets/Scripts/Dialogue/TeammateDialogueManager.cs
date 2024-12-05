@@ -9,11 +9,15 @@ public class TeammateDialogueManager : MonoBehaviour {
 	public DialogueText dialogueText; // 대사 데이터
 	public GameObject talkingTeammate; // 현재 대화 중인 팀원
 	public int textIndex = 0; // 대사 인덱스
+	public TeammateManager tempTeammateManager;
+
 
 	public void ProgressDialogue(GameObject talkingTeammate) {
 		if (this.talkingTeammate != talkingTeammate) {
 			// 새로운 팀원과 대화 시작
 			this.talkingTeammate = talkingTeammate;
+			// Teammate tempTeammate = talkingTeammate.GetComponent<Teammate>();
+			// tempTeammateManager.teammates.Add(tempTeammate);
 			textIndex = 0; // 인덱스 초기화
 			dialoguePanel.SetActive(true); // 대화 패널 활성화
 		}
