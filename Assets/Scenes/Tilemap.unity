@@ -859,6 +859,7 @@ GameObject:
   - component: {fileID: 743951394}
   - component: {fileID: 743951393}
   - component: {fileID: 743951396}
+  - component: {fileID: 743951397}
   m_Layer: 7
   m_Name: "\uB370\uC2AC1"
   m_TagString: Untagged
@@ -873,7 +874,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743951392}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1216b50a221902141b6c89f139bcd9d8, type: 3}
   m_Name: 
@@ -998,6 +999,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.6481667, y: 7.6153965}
   m_EdgeRadius: 0
+--- !u!114 &743951397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743951392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54392016b1cf4e643beab1ccfe2a48af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 0
+  speed: 0
+  standGauge: 50
+  attackPower: 0
+  currentHP: 0
+  defensePercent: 0
+  MonsterName: "\uC678\uACC4\uC778 \uC815\uC608\uBCD1"
+  skillsInitialized: 0
+  stun: 0
+  usedSkill: 0
+  monsterCategory: 1
 --- !u!1 &761558714
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,7 +1595,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 549956091}
   talkText: {fileID: 1218594074}
   dialogueText: {fileID: 117216792}
-  talkingTeammate: {fileID: 0}
+  talkingObject: {fileID: 0}
   textIndex: 0
 --- !u!4 &1367517778
 Transform:
@@ -1701,6 +1725,8 @@ MonoBehaviour:
   MonsterName: 
   skillsInitialized: 0
   stun: 0
+  usedSkill: 0
+  monsterCategory: 0
 --- !u!114 &1439465498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2222,6 +2248,7 @@ GameObject:
   - component: {fileID: 1677768789}
   - component: {fileID: 1677768788}
   - component: {fileID: 1677768791}
+  - component: {fileID: 1677768792}
   m_Layer: 6
   m_Name: "\uB370\uBBF8\uC5481"
   m_TagString: Untagged
@@ -2236,7 +2263,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677768787}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b678deb6207751449ddf1cac74fe655, type: 3}
   m_Name: 
@@ -2247,7 +2274,7 @@ MonoBehaviour:
   attackPower: 40
   currentHP: 0
   defensePercent: 10
-  MonsterName: 
+  MonsterName: "\uC678\uACC4\uC778 \uD558\uAE09\uC804\uC0AC"
   skillsInitialized: 0
 --- !u!212 &1677768789
 SpriteRenderer:
@@ -2361,6 +2388,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.4064293, y: 3.9314697}
   m_EdgeRadius: 0
+--- !u!114 &1677768792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677768787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54392016b1cf4e643beab1ccfe2a48af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 0
+  speed: 0
+  standGauge: 50
+  attackPower: 0
+  currentHP: 0
+  defensePercent: 0
+  MonsterName: 
+  skillsInitialized: 0
+  stun: 0
+  usedSkill: 0
+  monsterCategory: -1
 --- !u!1 &1682405348
 GameObject:
   m_ObjectHideFlags: 0
@@ -2468,6 +2518,8 @@ GameObject:
   - component: {fileID: 1903344379}
   - component: {fileID: 1903344381}
   - component: {fileID: 1903344382}
+  - component: {fileID: 1903344383}
+  - component: {fileID: 1903344384}
   m_Layer: 8
   m_Name: "\uB7ED\uD0A4"
   m_TagString: Untagged
@@ -2594,11 +2646,56 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903344378}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d3f3d26ae85f0046b719a58e1c08ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
+  speed: 0
+  standGauge: 50
+  attackPower: 0
+  currentHP: 0
+  defensePercent: 0
+  bossName: "\uC678\uACC4\uC778 \uCC99\uD6C4\uBCD1"
+  skillsInitialized: 0
+  stun: 0
+--- !u!114 &1903344383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903344378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54392016b1cf4e643beab1ccfe2a48af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 0
+  speed: 0
+  standGauge: 50
+  attackPower: 0
+  currentHP: 0
+  defensePercent: 0
+  MonsterName: "\uC678\uACC4\uC778 \uCC99\uD6C4\uBCD1"
+  skillsInitialized: 0
+  stun: 0
+  usedSkill: 0
+  monsterCategory: 0
+--- !u!114 &1903344384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903344378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a054c38125e94545b0afb295408dd21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectId: -1
 --- !u!1 &1920801249
 GameObject:
   m_ObjectHideFlags: 0
