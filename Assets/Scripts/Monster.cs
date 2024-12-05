@@ -25,14 +25,14 @@ public class Monster : MonoBehaviour
 	} // 아직 데미지 난수는 적용해두지 않은 상태
 
     // monsterCategory 구분:
-    // 필드몹 0, 척후병(중간보스) 1, 김규석 2, 최종보스 3(예정)
+    // 척후병 전 잡몹 -1, 척후병(중간보스) 0, 척후병 후 잡몹 1, 김규석 2, 최종보스 3(예정)
 
 	private static readonly Dictionary<string, MonsterData> MonsterDataDict = new Dictionary<string, MonsterData>
     {
         
         {
             "외계인 하급전사", 
-            new MonsterData(420, 40, 90, 10.0, 0, new List<Skill>
+            new MonsterData(420, 40, 90, 10.0, -1, new List<Skill>
             {
                 new Skill("강렬하게 휘두르기", 120, 0.0, 0,15),
                 new Skill("공포의 외침", 0, 0.0, 0,25)
@@ -41,7 +41,7 @@ public class Monster : MonoBehaviour
         },
         {
             "외계인 척후병",
-            new MonsterData(800, 100, 150, 15.0, 1, new List<Skill>
+            new MonsterData(800, 100, 150, 15.0, 0, new List<Skill>
             {
                 new Skill("방해의 광선", 80, 0.0, 0,30),
                 new Skill("고속 돌진", 180, 0.0, 0,50),
@@ -50,7 +50,7 @@ public class Monster : MonoBehaviour
         },
         {
             "외계인 정예병",
-            new MonsterData(1200, 80, 100, 15.0, 0, new List<Skill>
+            new MonsterData(1200, 80, 100, 15.0, 1, new List<Skill>
             {
                 new Skill("충격파", 150, 0.0, 0,30),
                 new Skill("광역 방해", 0, 0.0, 0,50),
@@ -76,24 +76,24 @@ public class Monster : MonoBehaviour
 
     public void InitializeMonster(string name)
     {
-        if (MonsterDataDict.TryGetValue(name, out MonsterData data))
-        {
-            MonsterName = name;
-            maxHP = data.MaxHP;
-            attackPower = data.AttackPower;
-            speed = data.Speed;
-            defensePercent = data.DefensePercent;
-            monsterCategory = data.MonsterCategory;
-            skills = new List<Skill>(data.Skills);
-            skillsInitialized = true;
-            stun = false;
-            usedSkill = false;
-        }
-        else
-        {
-            Debug.LogError($"Teammate data for {name} not found!");
-        }
-    }
+		if (MonsterDataDict.TryGetValue(name, out MonsterData data)) {
+			MonsterName = name;
+			maxHP = data.MaxHP;
+			attackPower = data.AttackPower;
+			speed = data.Speed;
+			defensePercent = data.DefensePercent;
+			monsterCategory = data.MonsterCategory;
+			skills = new List<Skill>(data.Skills);
+			skillsInitialized = true;
+			stun = false;
+			usedSkill = false;
+
+			Debug.Log($"{MonsterName} 초기화 완료: HP {maxHP}, 공격력 {attackPower}, 카테고리 {monsterCategory}");
+		} 
+        else {
+			Debug.LogError($"MonsterDataDict에 {name} 데이터가 없습니다!");
+		}
+	}
 
     private class MonsterData
     {
