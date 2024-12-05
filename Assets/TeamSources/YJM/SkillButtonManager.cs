@@ -125,7 +125,7 @@ public class SkillButtonManager : MonoBehaviour
 
     }
 
-    public class ActionData
+    public class ActionData //큐에 넣을거임
     {
         public Teammate teammate;
         public Skill skill;
@@ -139,7 +139,7 @@ public class SkillButtonManager : MonoBehaviour
         }
     }
 
-    public class PriorityQueue
+    public class PriorityQueue//우선순위 큐
     {
         private List<ActionData> actions = new List<ActionData>();
 
@@ -184,13 +184,13 @@ public class SkillButtonManager : MonoBehaviour
             Debug.Log($"{action.teammate.teammateName}이(가) {action.skill.skillName}을(를) 실행합니다.");
             battleManager.ApplySkillDamage(action.teammate, action.skill);
 
-            if( actionQueue.Count > 1 )
+            if ( action.teammate.speed < battleManager.battleMonster.speed && !battleManager.battleMonster.usedSkill)
             {
-                monster = battleManager.battleMonster;
+                
                 System.Random rand = new System.Random();
-                int randSkill = rand.Next(0, monster.skills.Count);
-
-                battleManager.MonsterSkillUse(monster, monster.skills[randSkill]);
+                int randSkill = rand.Next(0, battleManager.battleMonster.skills.Count);
+                battleManager.battleMonster.usedSkill = true;
+                battleManager.MonsterSkillUse(battleManager.battleMonster, battleManager.battleMonster.skills[randSkill]);
             }
             // 행동 간 딜레이 추가
             yield return new WaitForSeconds(1.0f);

@@ -15,6 +15,7 @@ public class Monster : MonoBehaviour
     public List<Skill> skills = new List<Skill>();
     public bool skillsInitialized = false;
     public bool stun = false; //기절 유무
+    public bool usedSkill = false; //스킬 사용 유무
 
     private static readonly Dictionary<string, MonsterData> MonsterDataDict = new Dictionary<string, MonsterData>
     {
@@ -45,7 +46,17 @@ public class Monster : MonoBehaviour
                 new Skill("광역 방해", 0, 0.0, 0,50),
                 new Skill("대폭발",170,0.0,0,100)
             })
+        },
+        {
+            "김규석",
+            new MonsterData(1800, 150, 130, 10.0, new List<Skill>
+            {
+                new Skill("얼음 창", 80, 0.0, 0,40),
+                new Skill("혹한의 바람", 60, 0.0, 0,60),
+                new Skill("절대 영도", 120, 0.0, 0,100)
+            })
         }
+
     };
     // Start is called before the first frame update
     void Start()
@@ -65,6 +76,7 @@ public class Monster : MonoBehaviour
             skills = new List<Skill>(data.Skills);
             skillsInitialized = true;
             stun = false;
+            usedSkill = false;
         }
         else
         {
