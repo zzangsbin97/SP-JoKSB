@@ -125,4 +125,5 @@ public class Teammate : MonoBehaviour
             Skills = skills;
         }
     }
+
 }

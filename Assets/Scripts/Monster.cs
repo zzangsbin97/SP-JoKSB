@@ -71,7 +71,7 @@ public class Monster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHP = maxHP;
+        
     }
 
     public void InitializeMonster(string name)
@@ -87,8 +87,8 @@ public class Monster : MonoBehaviour
 			skillsInitialized = true;
 			stun = false;
 			usedSkill = false;
-
-			Debug.Log($"{MonsterName} 초기화 완료: HP {maxHP}, 공격력 {attackPower}, 카테고리 {monsterCategory}");
+            currentHP = maxHP;
+            Debug.Log($"{MonsterName} 초기화 완료: HP {maxHP}, 공격력 {attackPower}, 카테고리 {monsterCategory}");
 		} 
         else {
 			Debug.LogError($"MonsterDataDict에 {name} 데이터가 없습니다!");
