@@ -47,6 +47,10 @@ public class ButtonManager : MonoBehaviour
         }
 
         Debug.Log($"ButtonManager: 총 {teammates.Count}명의 동료 데이터를 수신.");
+        foreach (Teammate teammate in teammates)
+        {
+            Debug.Log($"({teammate.teammateName}");
+        }
 
         int buttonIndex = 0;
         foreach (var teammate in teammates)

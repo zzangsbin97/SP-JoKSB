@@ -23,13 +23,14 @@ public class BattleManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
 
     void Start()
     {
         Screen.SetResolution(1080, 1920, true);
         Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true); // 화면 비율 고정
-
+        teammateManager = FindObjectOfType<TeammateManager>();
         // TeammateManager가 연결되지 않았다면 FindObjectOfType로 찾음
         if (teammateManager == null)
         {
@@ -97,7 +98,7 @@ public class BattleManager : MonoBehaviour
 
             if (battleMonster.currentHP <= 0) {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+                EndBattleAndReturnToTilemap();
 
             }
 
@@ -121,7 +122,7 @@ public class BattleManager : MonoBehaviour
             if (battleMonster.currentHP <= 0)
             {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+                EndBattleAndReturnToTilemap();
 
             }
         }
@@ -137,7 +138,7 @@ public class BattleManager : MonoBehaviour
             if (battleMonster.currentHP <= 0)
             {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+                EndBattleAndReturnToTilemap();
 
             }
         }
@@ -153,7 +154,7 @@ public class BattleManager : MonoBehaviour
             if (battleMonster.currentHP <= 0)
             {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+                EndBattleAndReturnToTilemap();
 
             }
         }
@@ -169,7 +170,7 @@ public class BattleManager : MonoBehaviour
             if (battleMonster.currentHP <= 0)
             {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+                EndBattleAndReturnToTilemap();
 
             }
         }
@@ -185,7 +186,7 @@ public class BattleManager : MonoBehaviour
             if (battleMonster.currentHP <= 0)
             {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+                EndBattleAndReturnToTilemap();
 
             }
         }
@@ -201,7 +202,7 @@ public class BattleManager : MonoBehaviour
             if (battleMonster.currentHP <= 0)
             {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+                EndBattleAndReturnToTilemap();
 
             }
         }
@@ -219,7 +220,7 @@ public class BattleManager : MonoBehaviour
             if (battleMonster.currentHP <= 0)
             {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+                EndBattleAndReturnToTilemap();
 
             }
         }
@@ -242,8 +243,7 @@ public class BattleManager : MonoBehaviour
             if (battleMonster.currentHP <= 0)
             {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
-
+                EndBattleAndReturnToTilemap();
             }
         }
         if (skill.skillName == "전기 충격")
@@ -266,8 +266,7 @@ public class BattleManager : MonoBehaviour
             if (battleMonster.currentHP <= 0)
             {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
-
+                EndBattleAndReturnToTilemap();
             }
         }
         if (skill.skillName == "전기 강화")
@@ -295,7 +294,7 @@ public class BattleManager : MonoBehaviour
             if (battleMonster.currentHP <= 0)
             {
                 Debug.Log($"몬스터 {battleMonster.MonsterName}를 쓰러뜨렸습니다. 배틀을 종료합니다.");
-                SceneManager.LoadScene("Tilemap"); // Battle 씬으로 전환
+                EndBattleAndReturnToTilemap();
 
             }
         }
@@ -460,15 +459,52 @@ public class BattleManager : MonoBehaviour
 
 
 
-    private void InitializeBattleTeammates()
+    public void InitializeBattleTeammates()
     {
-        battleTeammates = new List<Teammate>(teammateManager.teammates);
-        Debug.Log($"Teammates initialized: {battleTeammates.Count}명");
-        foreach (var teammate in battleTeammates)
+        // TeammateManager를 통해 동료 데이터를 가져옴
+        if (teammateManager == null)
         {
-            Debug.Log($"동료: {teammate.teammateName}, HP: {teammate.maxHP}, 공격력: {teammate.attackPercent}");
+            teammateManager = TeammateManager.Instance; // 싱글톤 참조
+            if (teammateManager == null)
+            {
+                Debug.LogError("TeammateManager를 찾을 수 없습니다!");
+            }
+        }
+
+        if (teammateManager.teammates == null || teammateManager.teammates.Count == 0)
+        {
+            Debug.LogError("BattleManager: TeammateManager에 동료 데이터가 없습니다!");
+            return;
+        }
+
+        // 기존 데이터를 초기화
+        battleTeammates.Clear();
+
+        // TeammateManager의 데이터를 복사
+        //battleTeammates.AddRange(teammateManager.teammates);
+        battleTeammates = new List<Teammate>(teammateManager.teammates);
+
+        if (battleTeammates.Count == 0)
+        {
+            Debug.LogWarning("BattleManager: battleTeammates에 추가된 동료가 없습니다.");
+            return;
+        }
+
+        if (battleTeammates.Count > 0)
+        {
+            Debug.Log("BattleManager: 이미 동료 데이터를 초기화했습니다.");
+            return; // 중복 초기화 방지
+        }
+
+        // 디버그 메시지로 동료 정보 출력
+        Debug.Log($"BattleManager: {battleTeammates.Count}명의 동료가 초기화되었습니다.");
+        foreach (Teammate teammate in battleTeammates)
+        {
+            Debug.Log($"BattleManager: 동료 이름 - {teammate.teammateName}, 체력: {teammate.maxHP}, 공격력: {teammate.attackPercent}");
         }
     }
+
+
 
     private void InitializeBattleMonster()
     {
@@ -536,7 +572,27 @@ public class BattleManager : MonoBehaviour
         Debug.Log($"턴 {turn}이(가) 시작되었습니다.");
         UpdateBattleState();
     }
+    public void EndBattleAndReturnToTilemap()
+    {
+        foreach (Teammate battleteammate in battleTeammates)
+        {
+            battleteammate.usedSkill = false;
+            battleteammate.standGauge += 20;
+        }
+        if (teammateManager != null)
+        {
+            Debug.Log("BattleManager: TeammateManager에 현재 팀 데이터를 업데이트합니다.");
+            teammateManager.UpdateTeammates(battleTeammates);
+        }
+        else
+        {
+            Debug.LogError("BattleManager: TeammateManager가 null입니다. 데이터 업데이트 실패.");
+        }
+        
 
+        // Tilemap 씬으로 이동
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Tilemap");
+    }
     private void UpdateBattleState()
     {
 
