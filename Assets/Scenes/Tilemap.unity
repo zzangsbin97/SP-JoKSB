@@ -2406,7 +2406,7 @@ MonoBehaviour:
   attackPower: 0
   currentHP: 0
   defensePercent: 0
-  MonsterName: 
+  MonsterName: "\uC678\uACC4\uC778 \uD558\uAE09\uC804\uC0AC"
   skillsInitialized: 0
   stun: 0
   usedSkill: 0
