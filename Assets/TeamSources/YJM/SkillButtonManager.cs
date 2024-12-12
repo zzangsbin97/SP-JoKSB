@@ -43,7 +43,7 @@ public class SkillButtonManager : MonoBehaviour
 
         ActiveTeammate = teammate;
 
-        Debug.Log($"ActivateSkillButtons 호출: 이름 = {ActiveTeammate.teammateName}, 체력 = {ActiveTeammate.maxHP}, 스킬 개수 = {ActiveTeammate.skills?.Count ?? 0}");
+        Debug.Log($"ActivateSkillButtons 호출: 이름 = {ActiveTeammate.teammateName}, 체력 = {ActiveTeammate.currentHP}, 스킬 개수 = {ActiveTeammate.skills?.Count ?? 0},스탠드게이지 = {ActiveTeammate.standGauge}");
 
         if (ActiveTeammate.skills == null || ActiveTeammate.skills.Count == 0)
         {
@@ -82,7 +82,7 @@ public class SkillButtonManager : MonoBehaviour
     }
     public void OnSkillButtonClicked(Teammate Teammate, Skill skill)
     {
-        Debug.Log($"OnSkillButtonClicked호출: 이름 = {Teammate.teammateName}, 체력 = {Teammate.maxHP}, 스킬 개수 = {Teammate.skills?.Count ?? 0}");
+        Debug.Log($"OnSkillButtonClicked호출: 이름 = {Teammate.teammateName}, 체력 = {Teammate.currentHP}, 스킬 개수 = {Teammate.skills?.Count ?? 0}, 스탠드게이지 = {Teammate.standGauge}");
         if (!Teammate.usedSkill)
         {
             if (!Teammate.stun)
@@ -110,12 +110,16 @@ public class SkillButtonManager : MonoBehaviour
                 {
                     Debug.LogWarning($"{Teammate.teammateName}의 스탠드 게이지가 부족합니다!");
                     actionQueue.Enqueue(null); // NULL 액션 추가
+                    Teammate.usedSkill = true;
                     CheckAndExecuteQueue();
                 }
             }
             else
             {
                 Debug.Log($"{Teammate.teammateName}가 기절상태입니다!");
+                actionQueue.Enqueue(null);
+                Teammate.usedSkill = true;
+                CheckAndExecuteQueue();
             }
         }
         else
@@ -188,11 +192,14 @@ public class SkillButtonManager : MonoBehaviour
 
             if ( action.teammate.speed < battleManager.battleMonster.speed && !battleManager.battleMonster.usedSkill)
             {
+                if (!battleManager.battleMonster.stun)
+                {
+                    System.Random rand = new System.Random();
+                    int randSkill = rand.Next(0, battleManager.battleMonster.skills.Count);
+                    battleManager.battleMonster.usedSkill = true;
+                    battleManager.MonsterSkillUse(battleManager.battleMonster, battleManager.battleMonster.skills[randSkill]);
+                }
                 
-                System.Random rand = new System.Random();
-                int randSkill = rand.Next(0, battleManager.battleMonster.skills.Count);
-                battleManager.battleMonster.usedSkill = true;
-                battleManager.MonsterSkillUse(battleManager.battleMonster, battleManager.battleMonster.skills[randSkill]);
             }
             // 행동 간 딜레이 추가
             yield return new WaitForSeconds(1.0f);
