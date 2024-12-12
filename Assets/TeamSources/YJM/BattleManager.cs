@@ -7,6 +7,7 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance { get; private set; }
     public TeammateManager teammateManager; // Unity Editor에서 연결 가능
+    public Teammate teammates;
     public MonsterManager monsterManager; // Unity Editor에서 연결 가능
     public List<Teammate> battleTeammates = new List<Teammate>();
     public Monster battleMonster; // 배틀에 등장하는 몬스터
@@ -500,7 +501,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log($"BattleManager: {battleTeammates.Count}명의 동료가 초기화되었습니다.");
         foreach (Teammate teammate in battleTeammates)
         {
-            Debug.Log($"BattleManager: 동료 이름 - {teammate.teammateName}, 체력: {teammate.maxHP}, 공격력: {teammate.attackPercent}");
+            Debug.Log($"BattleManager: 동료 이름 - {teammate.teammateName}, 체력: {teammate.currentHP}, 공격력: {teammate.attackPercent}, 스탠드게이지 : {teammate.standGauge}");
         }
     }
 
@@ -578,6 +579,15 @@ public class BattleManager : MonoBehaviour
         {
             battleteammate.usedSkill = false;
             battleteammate.standGauge += 20;
+            foreach(Teammate teammates in teammateManager.teammates)
+            {
+                if(battleteammate.teammateName == teammates.name)
+                {
+                    teammates.standGauge = battleteammate.standGauge;
+                    teammates.currentHP = battleteammate.currentHP;
+                }
+            }
+            
         }
         if (teammateManager != null)
         {
