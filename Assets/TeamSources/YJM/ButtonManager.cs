@@ -47,12 +47,14 @@ public class ButtonManager : MonoBehaviour
         }
 
         Debug.Log($"ButtonManager: 총 {teammates.Count}명의 동료 데이터를 수신.");
+       
         foreach (Teammate teammate in teammates)
         {
             Debug.Log($"({teammate.teammateName}");
         }
 
         int buttonIndex = 0;
+
         foreach (var teammate in teammates)
         {
             if (buttonIndex > buttons.Count)
@@ -61,8 +63,12 @@ public class ButtonManager : MonoBehaviour
                 break;
             }
 
-            Button button = buttons[buttonIndex];
-            button.gameObject.SetActive(true);
+			Button button = buttons[buttonIndex];
+
+			if (!teammate.isDead) {
+                
+                button.gameObject.SetActive(true);
+            }
 
             TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
             if (buttonText != null)
@@ -75,6 +81,13 @@ public class ButtonManager : MonoBehaviour
 
             Debug.Log($"ButtonManager: {teammate.teammateName} 버튼 활성화 완료.");
             buttonIndex++;
+
+            Slider teammateHpSlider = button.GetComponentInChildren<Slider>();
+
+            if (teammateHpSlider != null) {
+                teammateHpSlider.maxValue = teammate.maxHP;
+                teammateHpSlider.value = teammate.currentHP;
+            }
         }
 
         DisableExtraButtons(buttonIndex);

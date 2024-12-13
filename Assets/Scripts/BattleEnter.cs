@@ -25,7 +25,7 @@ public class BattleEnter : MonoBehaviour {
 
 			Debug.Log($"충돌한 몬스터: {collidedMonster.MonsterName}, 공격력: {collidedMonster.attackPower}");
 
-			if (Math.Abs(collidedMonster.monsterCategory) != 1) {
+			if (Math.Abs(collidedMonster.monsterCategory) != 3) {
 				// 스크립트가 있으니까 대화 진행
 				TeammateDialogueManager.Instance.ProgressDialogue(collidedMonster.gameObject); // GameObject 전달
 			} else {

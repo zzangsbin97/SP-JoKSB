@@ -4,19 +4,40 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour {
-	public InputAction interAction; // 상호작용 키
-	Rigidbody2D rigidbody2d;
-	public TeammateDialogueManager teammateDialogueManager; // 대화 매니저
-	public GameObject scanObject; // 현재 상호작용 대상
+	public InputAction interAction;   // 상호작용 키
+	private Rigidbody2D rigidbody2d;
+	public AudioSource audioSrc;      // 발소리 AudioSource
+	public TeammateDialogueManager teammateDialogueManager;
+	public GameObject scanObject;    // 현재 상호작용 대상
+
+	private Vector2 moveInput;
 
 	void Start() {
 		rigidbody2d = GetComponent<Rigidbody2D>();
-		interAction.Enable(); // 입력 활성화
-		interAction.performed += OnInterAction; // 상호작용 키 입력 연결
+		audioSrc = GetComponent<AudioSource>();
+
+		interAction.Enable();
+		interAction.performed += OnInterAction;
 	}
 
 	void Update() {
-		FindTeammate(); // 매 프레임마다 주변 팀원 감지
+		FindTeammate();    // 주변 팀원 감지
+		HandleMovement();  // 이동 처리
+	}
+
+	void HandleMovement() {
+		// 방향키 입력 처리
+		moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+		// 이동 시 발소리 재생
+		if (moveInput.magnitude > 0 && !audioSrc.isPlaying) {
+			audioSrc.Play();  // 발소리 재생
+		} else if (moveInput.magnitude == 0 && audioSrc.isPlaying) {
+			audioSrc.Stop();  // 멈출 때 발소리 정지
+		}
+
+		// 이동 속도 적용
+		// rigidbody2d.velocity = moveInput.normalized * 5f;
 	}
 
 	void FindTeammate() {
@@ -33,7 +54,7 @@ public class Player : MonoBehaviour {
 				return;
 			}
 		}
-		scanObject = null; // 감지된 팀원이 없으면 초기화
+		scanObject = null;
 	}
 
 	void OnInterAction(InputAction.CallbackContext context) {

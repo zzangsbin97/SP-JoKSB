@@ -17,6 +17,8 @@ public class Teammate : MonoBehaviour
     public bool stun = false; //기절 유무
     public bool usedSkill = false; //스킬 사용 유무
 
+    public bool isDead = false;
+
 
 
     /*void OnTriggerEnter2D(Collider2D other) {

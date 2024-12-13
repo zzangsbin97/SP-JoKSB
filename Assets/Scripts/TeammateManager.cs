@@ -19,20 +19,22 @@ public class TeammateManager : MonoBehaviour
         // ÆÀ ¸ñ·Ï¿¡ Ãß°¡
         AddTeammate(Teammate);
 
+        
 
         teammateObject = new GameObject("¿ÀÁ¤ÈÆ");
         Teammate = teammateObject.AddComponent<Teammate>();
         Teammate.InitializeTeammate("¿ÀÁ¤ÈÆ");
         AddTeammate(Teammate);
         DontDestroyOnLoad(Teammate);
-
+      
+        
         teammateObject = new GameObject("Á¶Á¤ÈÆ");
         Teammate = teammateObject.AddComponent<Teammate>();
         Teammate.InitializeTeammate("Á¶Á¤ÈÆ");
         AddTeammate(Teammate);
         DontDestroyOnLoad(Teammate);
-
-
+        
+        /*
         teammateObject = new GameObject("À¯Àç¹Î");
         Teammate = teammateObject.AddComponent<Teammate>();
         Teammate.InitializeTeammate("À¯Àç¹Î");
@@ -43,8 +45,8 @@ public class TeammateManager : MonoBehaviour
         Teammate = teammateObject.AddComponent<Teammate>();
         Teammate.InitializeTeammate("ÃÖµ¿¿í & ³ªºñ");
         AddTeammate(Teammate);
-
-
+        */
+        
         DontDestroyOnLoad(Teammate);
 
     }
